@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block body %}
+<body>
+    <div class="container" style="width: 350px">
+        {% block role %}
+{#            <h2 style="color: #5bc0de">销售人员登陆界面</h2>#}
+        {% endblock %}
+        <form class="form-signin" method="post">
+              {% csrf_token %}
+            <h2 class="form-signin-heading">用户登陆</h2>
+
+            <label for="email" class="sr-only">Email address</label>
+            <input type="email" name="email" class="form-control" placeholder="Email address" >
+              <br>
+
+            <label for="password" class="sr-only">Password</label>
+            <input type="password" name="password" class="form-control" placeholder="Password" >
+
+            {% if errors  %}
+                <span style="color: red">{{errors.error }}</span>
+            {% endif %}
+
+            <div class="item">
+                <p class="remember">
+                    <input type="checkbox" id="remember" name="remember" tabindex="4">
+                    <label for="remember" class="remember">下次自动登录</label> | <a href="">忘记密码了</a>
+                </p>
+            </div>
+
+            <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+
+        </form>
+        <br>
+            {% block registered %}
+{#            <a href=""><button class="btn btn-lg  btn-block" type="submit">注册</button></a>#}
+            {% endblock %}
+        <br>
+{#        <a href="/myobjects/">退出并返回网站首页</a>#}
+    </div>
+</body>
+{% endblock %}

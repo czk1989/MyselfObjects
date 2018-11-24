@@ -1,0 +1,25 @@
+{% extends 'crm/my_customer.html' %}
+
+{% block menu-add %}
+    <li >报名</li>
+{% endblock %}
+
+{% block btn-add %}
+ {% endblock %}
+
+{% block menu-right %}
+    {{ enroll_form.errors }}
+    <div>学员报名</div>
+    <div>{{ msg }}</div>
+    <form action="" class="form-horizontal" role="form" method="post">
+    {% csrf_token %}
+        <label for="">客户：{{ customer_name }}</label>
+        {% for field in enroll_form %}
+            <div class="form-group" style="width: 300px">
+                <label class="col-sm control-label" for="">{{ field.label }}:</label>{{ field }}
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-success pull-left">下一步</button>
+    </form>
+
+{% endblock %}

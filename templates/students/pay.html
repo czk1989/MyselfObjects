@@ -1,0 +1,32 @@
+{% extends 'students/course_list.html' %}
+
+{% block menu-add %}
+  <li >报名流程2</li>
+  <li >付款</li>
+{% endblock %}
+
+{% block menu-right %}
+    <form action="" class="form-horizontal" role="form" method="post" style="width: 400px">
+        {% csrf_token %}
+        <div>
+            <label for="">{{ enroll_obj.customer }}</label>
+        </div>
+        <div>
+            <label for="">所报班级：{{ enroll_obj.enrolled_class }}</label>
+        </div>
+        <div>
+            <label for="">课程费用：{{ price }}元</label>
+        </div>
+
+                {% for field in payment_form %}
+            <div  >
+                <label  for="">付款{{ field.label }}(元):</label>{{ field }}
+            </div>
+        {% endfor %}
+            <div>
+                {{ msg }}
+            </div>
+        <br>
+        <div  style="width: 600px;display: inline-block"><button type="submit" class="btn btn-success pull-left">付款</button></div>
+    </form>
+{% endblock %}

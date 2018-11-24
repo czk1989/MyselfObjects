@@ -1,0 +1,53 @@
+{% extends 'students/course_list.html' %}
+
+{% block menu-add %}
+  <li >报名流程1</li>
+{% endblock %}
+
+
+{% block btn-add %}
+
+ {% endblock %}
+
+{% block menu-right %}
+    {{ enroll_form.errors }}
+    <div>{{ msg }}</div>
+    <form action="" class="" role="form" method="post" style="padding-left: 200px">
+    {% csrf_token %}
+        <div class="form-group" ><label for="">客户：{{ customer_name }}</label></div>
+        <div class="form-group" ><label for="">邮箱：{{ customer_email }}</label></div>
+        <br>
+        <div class="form-group" ><label for="">报名校区：{{ branch }}</label></div>
+        <div class="form-group" ><label for="">报名课程：{{ course }}</label></div>
+            <br>
+        <div class="form-group" >
+            <label style="height: 300px;width: 600px;overflow: auto">{{ template }}</label>
+        </div>
+
+        {% for field in enroll_form %}
+            <div class="form-group" >
+                <label  for="">{{ field.label }}:</label>{{ field }}{{ field.errors }}
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-default  pull-left" disabled>下一步</button>
+    </form>
+
+{% endblock %}
+    
+    {% block script-obj %}
+        <script>
+        $(":checkbox").click(function () {
+            if ($("input:checked").length == 1){
+                       $(":submit").addClass('btn-success');
+                        $(":submit").attr('disabled',false)
+            }else {
+                  $(":submit").addClass('btn-default');
+                        $(":submit").removeClass('btn-success');
+                          $(":submit").attr('disabled',true)
+            }
+
+        });
+
+
+        </script>
+    {% endblock %}

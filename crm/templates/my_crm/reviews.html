@@ -1,0 +1,19 @@
+{% extends 'king_admin/king_admin_index.html' %}
+{% block container %}
+
+        <div class="form-group" style="width: 400px">
+            <h3>客户信息：</h3>
+            {{ customer_obj }}
+        </div>
+        <div class="form-group" style="width: 400px">
+            <h3>报名信息：</h3>
+            {{ enroll_form }}
+        </div>
+        <div style="width: 400px">
+            <a href="/crm/customer/return/{{ enroll_obj.id }}/" class="btn btn-danger pull-left">驳回合同</a>
+            <a href="/crm/customer/payment/{{ enroll_obj.id }}/" class="btn btn-success pull-right" >下一步</a>
+        </div>
+
+
+
+{% endblock %}

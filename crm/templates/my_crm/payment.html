@@ -1,0 +1,22 @@
+{% extends 'king_admin/king_admin_index.html' %}
+{% block container %}
+    <h3>缴费页面</h3>
+    <form action="" class="form-horizontal" role="form" method="post" style="width: 400px">
+        {% csrf_token %}
+        <div>
+            <label for="">客户：{{ enroll_obj.customer }}</label>
+        </div>
+        <div>
+            <label for="">所报班级：{{ enroll_obj.enrolled_class }}</label>
+        </div>
+        <div>
+            <label for="">缴费金额：</label>
+            <input  name="amount" type="text" placeholder="金额大于500才能提交">
+            {{ msg }}
+        </div>
+        <div>
+            <label for="">课程顾问：{{ enroll_obj.consultant }}</label>
+        </div>
+        <div  style="width: 600px;display: inline-block"><button type="submit" class="btn btn-success pull-left">提交</button></div>
+    </form>
+{% endblock %}

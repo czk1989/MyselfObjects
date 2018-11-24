@@ -1,0 +1,72 @@
+{% extends 'king_admin/king_admin_base.html' %}
+{% load king_admin_tags %}
+
+{% block body %}
+<body >
+		<!--头部左侧菜单栏-->
+		<!--===================================================-->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="">CRM后台管理系统</a>
+            </div>
+          <!--头部右侧登陆框-->
+		<!--===================================================-->
+          <div id="navbar" class="navbar-collapse collapse">
+                {% block title-login %}
+
+                {% endblock %}
+          </div>
+
+        </div>
+    </nav>
+
+          <!--中间内容-->
+		<!--===================================================-->
+    <div class="container-fluid">
+         <div class="row">
+
+              <div class=" col-sm-3 col-md-2 sidebar" >
+                  <div>
+                      <a href="/king_admin/" style="font-size: larger;color: black">首页</a>
+                  </div>
+                          <!--左侧菜单栏部分-->
+                    <!--===================================================-->
+                  {% block menu-left %}
+
+                  {% endblock %}
+              </div>
+
+                      <!--右侧页面-->
+                <!--===================================================-->
+              <div class=" col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                    <div class="row" >
+                        <div class="panel panel-info" style="height: 500px;" >
+                      <!--右侧导航栏部分-->
+                <!--===================================================-->
+                             {% block menu-navigation %}
+
+                             {% endblock %}
+                       <!--右侧内容部分-->
+                <!--===================================================-->
+                             <div style="height: 440px;overflow: auto">
+                                {% block menu-right %}
+
+                                {% endblock %}
+                             </div>
+                        </div>
+                    </div>
+
+              </div>
+         </div>
+    </div>
+
+</body>
+
+{% endblock %}

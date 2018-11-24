@@ -1,0 +1,27 @@
+
+{% extends 'base.html' %}
+{% block role_menu %}
+
+{% endblock %}
+
+{% block body %}
+
+    <form class="form-horizontal " method="post" action=".">
+            <div class="row" style="margin-left: 70px;width: 300px" >
+                <h3 ><span style="color: red">*</span>注册</h3>
+
+            </div>
+    {% csrf_token %}
+    {{ errors }}
+          {% for foo in account_obj %}
+                <div class="form-group" style="margin: 10px ">
+                    <label for="inputEmail3" class="col-sm-2 control-label">{{ foo.label }}</label>
+                        <div class="col-sm-6">{{ foo }}</div>
+                </div>
+          {% endfor %}
+        <br>
+            <div class="row" style="margin-left: 70px;width: 300px" >
+                <button type="submit" class="btn btn-success" ><span class="glyphicon glyphicon-ok" aria-hidden="true">提交</span></button>
+            </div>
+    </form>
+{% endblock %}

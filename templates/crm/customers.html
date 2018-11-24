@@ -1,0 +1,154 @@
+{% extends 'crm/sales_home.html' %}
+{% load crm_tags %}
+
+
+ {% block menu-navigation %}
+      <!--导航条-->
+<!--===================================================-->
+
+  <ol class="breadcrumb" style="font-size: large">
+      <li ><span href="" >{{ app_name }}</span></li>
+      <li ><span id="table-name"><a href="/{{ app_name }}/{{ table_name }}/">{% render_app_name admin_class %}</a></span></li>
+      {% block menu-add %}{% endblock %}
+  </ol>
+
+{% endblock %}
+
+{% block menu-right %}
+              <!--显示功能-->
+    <!--===================================================-->
+      <div class="panel-body " style="overflow: auto" >
+            <form method="get" action="" style="margin-top: -15px;">
+                {% csrf_token %}
+
+                          <!--查询检索栏-->
+                    <!--===================================================-->
+                {% if  admin_class.list_filters %}
+                    <div class="row">
+                          {% for condition in admin_class.list_filters %}
+                               <span>&nbsp;&nbsp;&nbsp;&nbsp;{% get_key_val  condition admin_class  %}&nbsp;-&nbsp;</span>
+                               {% render_filter_eme  condition admin_class filter_condition %}
+                          {% endfor %}
+                          &nbsp;&nbsp;<button type="submit" class="btn btn-primary btn-sm">检索</button>
+
+                    </div>
+                {% endif %}
+                          <!--关键字搜索栏-->
+                    <!--===================================================-->
+                <div class="row" >
+                      <div class="col-lg-2" style="display: inline-block;">
+                          <input name="_q" type="text" class='form-control input-sm' placeholder="{% for i in admin_class.list_search %}{% search_name i admin_class %}&nbsp;{% endfor %}" value="{{ search_key }}">
+                      </div>
+                      <button type="submit" class="btn btn-primary btn-sm" style="display: inline-block; width:auto"  >查找关键字</button>
+                  </div>
+            </form>
+            <br>
+                      <!--自定义action功能选项-->
+                <!--===================================================-->
+            <form class="row col-lg-2" action="" method="post" onsubmit="return ActionSubmit(this)" id="Addfieldsid">
+                {% csrf_token %}
+                <select class='btn-sm form-group ' name="action" id="select-value" style="display: inline-block; width: 200px">
+                    <option value="">-------------------------</option>
+                    {% for func_list in admin_class.list_action %}
+                        <option value="{{ func_list}}">{% func_name func_list admin_class %}</option>
+                    {% endfor %}
+                </select>
+                &nbsp;&nbsp;<button type="submit" class=" btn btn-sm"  >Go</button>
+            </form>
+
+                        <!--显示内容-->
+                <!--===================================================-->
+            <table class="table table-hover">
+
+                        <!--显示标题并实现排序功能-->
+                <!--===================================================-->
+                <thead>
+                      <tr class="breadcrumb">
+                      <th style="width: 20px">
+                          <input  type="checkbox" id="all-choiced">
+                      </th>
+                      {% for column in admin_class.list_display %}
+                          <th>
+                              {% buile_table_header_column admin_class column orderby_key filter_condition %}
+                          </th>
+                      {% endfor %}
+                      </tr>
+                </thead>
+
+                    <!--显示数据字段详细信息-->
+              <!--===================================================-->
+                <tbody>
+
+                      {% for obj in query_sets %}
+                            <tr>
+                                <td >
+                                    <input id="choiced-field" type="checkbox" value="{{ obj.id }}">
+                                </td>
+                                {% show_table obj admin_class request %}
+                            </tr>
+                      {% endfor %}
+                </tbody>
+            </table>
+
+          <!--统计-->
+      <!--===================================================-->
+            <p>总计{{ query_sets.paginator.count }}条记录</p>
+
+          <!--分页栏-->
+      <!--===================================================-->
+          <div class="pagination">
+              <nav aria-label="...">
+                  <ul class="pagination">
+                      {% page_index query_sets filter_condition previous_orderby search_key %}
+                  </ul>
+              </nav>
+          </div>
+      </div>
+
+
+{% endblock %}
+
+{% block script-list %}
+    <script>
+
+        active_ele=$('span#table-name').text();
+        $('li#menu a').each(
+            function () {
+            if($(this).text()==active_ele){
+                $(this).parent().addClass('active ');
+            }
+        });
+
+{#实现多选功能#}
+        $('input#all-choiced').click(function () {
+            if($('input#all-choiced').prop('checked')){
+                $('input#choiced-field').each(function () {
+                 if ($(this).prop('checked',false)){
+                     $(this).prop('checked',true);
+                 }
+             })
+            }
+        });
+{#提交action时将id传给后台#}
+        function ActionSubmit(form_ele) {
+            var selected_list=[];
+            $('input#choiced-field:checked').each(function () {
+                selected_list.push($(this).val());
+            });
+            var selected_action=$('select#select-value').val();
+            if (selected_list.length == 0 ){
+                alert('请至少选择一列选项');
+                return false;
+            }
+            if (!selected_action){
+                alert('请选择action功能');
+                return false;
+            }
+            var ele="<input name='selected_list' type='hidden' value='"+selected_list.toString()+"'>";
+            $(form_ele).append(ele);
+            return true;
+        }
+    </script>
+    {% block script-obj %}
+    {% endblock %}
+{% endblock %}

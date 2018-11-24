@@ -1,0 +1,25 @@
+{% extends 'king_admin/king_admin_table_objs.html' %}
+{% load king_admin_tags %}
+
+{% block menu-add %}
+    <li >删除</li>
+{% endblock %}
+
+{% block menu-right %}
+       <div class="alert alert-info">
+           {{ errors }}
+           {% display_obj_related objs table_name %}
+       </div>
+
+       <form action="{% to_url objs app_name table_name  %}" method="post" style="margin-left: 20px">
+             {% csrf_token %}
+             <input type="hidden" name="delete_obj" value="{{ objs_id }}">
+             <button type="submit" class="btn btn-danger  btn-sm" >确认删除
+                 <span class ='glyphicon glyphicon-trash ' aria-hidden='true'></span>
+             </button>
+             <a href="{{ back_edit_url_path }}" class="label label-default" style="margin-left: 40px;font-size: large">返回</a>
+       </form>
+
+
+{% endblock %}
+

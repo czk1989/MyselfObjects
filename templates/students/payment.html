@@ -1,0 +1,30 @@
+{% extends 'students/students_home.html' %}
+{% load students_tags %}
+
+ {% block menu-navigation %}
+      <!--导航条-->
+<!--===================================================-->
+
+  <ol class="breadcrumb" style="font-size: large">
+      <li ><span href="" >students</span></li>
+      <li ><span id="table-name"><a href="/students/my_course/">缴费记录表</a></span></li>
+      {% block menu-add %}{% endblock %}
+  </ol>
+
+{% endblock %}
+
+{% block menu-right %}
+
+        {% if condition %}
+                {% for record in payment_list %}
+                    <div  >
+                        <label  for="">{{ record.customer }}/{{ record.course }}/{{ record.amount }}</label>
+                    </div>
+                {% endfor %}
+        {% else %}
+            <div>么有缴费记录</div>
+        {% endif %}
+        <div class="row">
+            <label class="form-group" style="color: #5bc0de">页面优化待完善...</label>
+        </div>
+{% endblock %}

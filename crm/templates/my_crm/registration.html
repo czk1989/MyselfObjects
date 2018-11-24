@@ -1,0 +1,92 @@
+{% extends 'global-template/../../../templates/base.html' %}
+{% load crm_tags %}
+{% block content %}
+    <div class="container-fluid" style="width: 800px">
+    <div>{{ customer_form.errors }}</div>
+            {% if status != 1 %}
+        <form action="" class="form-group" method="post" onsubmit="return RegisterFormCheck()">
+        {% csrf_token %}
+            <div class="panel panel-info">
+               <div class="panel-heading">
+                 <h3 class="panel-title">学员报名表</h3>
+               </div>
+               <div class="panel-body ">
+                   {% for field in customer_form %}
+                       <label for="" class="control-label" style="width: 100px">{{ field.label }}</label>
+                       <div  style="width: 600px;display: inline-block">{{ field }}</div>
+                   {% endfor %}
+                   <br>
+                       <label for="" class="control-label" style="width: 100px">所报班级：</label>
+                       <div  style="width: 600px;display: inline-block">{{ enroll_obj.enrolled_class }}</div>
+                       <label for="" class="control-label" style="width: 100px">所报班级：</label>
+                       <div  style="width: 600px;display: inline-block">{{ enroll_obj.enrolled_class.course.price }}</div>
+                       <label for="" class="control-label" style="width: 100px">开课日期：</label>
+                       <div  style="width: 600px;display: inline-block">{{ enroll_obj.enrolled_class.start_date }}</div>
+                       <label for="" class="control-label" style="width: 100px"></label>
+                       <div  style="width: 600px;display: inline-block">
+                           <pre style="height: 500px;overflow: auto">{% render_enroll_contract enroll_obj %}</pre>
+                       </div>
+                       <div  style="text-align: center; width: 600px;display: inline-block"><input type="checkbox" value="contract_agreed">我已阅读完并同意所有条款</div>
+                       <div  style="width: 600px;display: inline-block"><button type="submit" class="btn btn-success pull-right">提交</button></div>
+
+
+               </div>
+            </div>
+        </form>
+
+
+{#------------------------#}
+<form action="" method="post" class="dropzone needsclick dz-clickable">
+{% csrf_token %}
+    <div class="dz-message needsclick">
+        <span>请把身份证正反面上传</span>
+    </div>
+    <div>
+        <p class="dz-clickable">请把身份证拖放到这里</p>
+        <p class="text-muted">最多上传两张照片</p>
+    </div>
+</form>
+                <br>
+                <br>
+                <br>
+            {% else %}
+
+            <div>报名成功，感谢！！！</div>
+
+            {% endif %}
+    </div>
+{% endblock %}
+
+{% block script-list %}
+    <script>
+    function RegisterFormCheck() {
+
+
+        if ($('form :checkbox').prop('checked')){
+           $('form :disabled').removeAttr('disabled');
+           return true;
+       }else {
+            alert('点击已阅读 才能提交');
+            return false;
+        }
+    }
+
+    $(document).ready(function () {
+        Dropzone.options.file = {
+            uri: '{{ request.path }}',
+            paramName: 'file',
+            maxFilesize: 1,
+            addRemoveLinks: true,
+            maxFiles: 5,
+            uploadMultiple: true,
+            accept: function (file, done) {
+                if (file.name == 'justin') {
+                    done('Naha,you do not ');
+                } else {
+                    done();
+                }
+            }
+        }
+    })
+    </script>
+{% endblock %}

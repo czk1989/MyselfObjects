@@ -1,0 +1,43 @@
+{% extends 'home.html' %}
+
+
+{% block tag %}
+    {% load king_admin_tags %}
+{% endblock %}
+
+{% block logout %}
+    <li><a href="{% url 'students:stu_logout' %} ">注销</a></li>
+{% endblock %}
+
+
+{% block menu_left %}
+      <ul class="nav nav-sidebar">
+        <li class="active"><a href="/students/">学员首页<span class="sr-only">(可以隐藏)</span></a></li>
+      </ul>
+      {% for app_name,table_obj in menus.items %}
+      <ul class="nav nav-sidebar">
+         {% for table in table_obj %}
+             <li id="menu"><a href="/{{ app_name.url_name }}{{table.url_name}}">{{ table.name }}</a></li>
+         {% endfor %}
+             <li id="menu"><a href="/students/my_course/">我的课程</a></li>
+      </ul>
+
+      {% endfor %}
+
+{% endblock %}
+
+{% block script-list %}
+    <script>
+
+        active_ele=$('span#table-name').text();
+        $('li#menu a').each(
+            function () {
+            if($(this).text()==active_ele){
+                $(this).parent().addClass('active ');
+            }
+        });
+
+    </script>
+    {% block script-obj %}
+    {% endblock %}
+{% endblock %}
