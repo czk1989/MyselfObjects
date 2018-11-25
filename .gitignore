@@ -57,7 +57,7 @@ coverage.xml
 *.log
 local_settings.py
 settings.py
-
+MyselfObjects/settings.py
 
 db.sqlite3
 
