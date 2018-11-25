@@ -87,7 +87,7 @@ DATABASES = {
         'NAME': 'crm',
         'USER': 'root',
         'PASSWORD': '3Dian14/',
-        'HOST': '192.168.209.134',
+        'HOST': '192.168.1.5',
         'PORT': '3306',
     },
 }
