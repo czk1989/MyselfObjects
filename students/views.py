@@ -12,6 +12,7 @@ from crm import models as crmmodels
 
 
 def stu_login(request):
+    print('hello')
     response=views_base.Login(request,'students').acc_login()
     return response
 
