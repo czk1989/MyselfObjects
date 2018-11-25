@@ -8,6 +8,7 @@ urlpatterns = [
     re_path('^login/$', views.teacher_login, name='teacher_login'),
     re_path('^logout/$', views.teacher_logout, name='teacher_logout'),
     re_path('^my_class/$', views.my_class, name='my_class'),
+    re_path('^my_class/(?P<class_id>\d+)/stu_list/$', views.class_stu_list, name='class_stu_list'),
     # re_path('^registered/$', views.registered, name='stu_registered'),
     # re_path('^jump/$', views.jump),
     # re_path('^classlist/$', views.classlist,name='classlist'),

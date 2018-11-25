@@ -37,15 +37,10 @@
                             </td>
                             <td>{{ class_obj.total_class_nums }}</td>
                             <td>
-{#                                {% if class_obj.class_type == 0  %}#}
                                     {{ class_obj.courserecord_set.select_related.count }}
-{#                                {% elif class_obj.class_type == 1 %}#}
-
-{#                                {% endif %}#}
                             </td>
                             <td>
-{#                                <a class="btn-link" href="{% url 'view_class_stu_list'  class_obj.id  %}">{{ class_obj.enrollment_set.select_related.count }}</a>#}
-                                <a class="btn-link" href="">{{ class_obj.enrollment_set.select_related.count }}</a>
+                                <a class="btn-link" href="{% url 'teachers:class_stu_list' class_obj.id %}">{{ class_obj.enrollment_set.select_related.count }}</a>
                             </td>
                             <td><a class="btn-link" href="/king_admin/?course={{ class_obj.id }}">上课纪录</a></td>
                         </tr>

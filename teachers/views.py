@@ -28,4 +28,8 @@ def index(request):
 def my_class(request):
     return render(request, 'teachers/my_classes.html')
 
+def class_stu_list(request,class_id):
+
+    class_obj = crmmodels.ClassList.objects.get(id=class_id)
+    return render(request,'teachers/class_stu_list.html',{'class_ojb':class_obj})
 
