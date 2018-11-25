@@ -12,7 +12,7 @@ from crm import models as crmmodels
 
 
 def stu_login(request):
-    print('hello')
+    
     response=views_base.Login(request,'students').acc_login()
     return response
 
@@ -161,4 +161,5 @@ def payment(request):
                                                    })
 
 def studyrecord(request):
+    print('n PC')
     return HttpResponse('正在开发...')
