@@ -30,7 +30,7 @@ def my_class(request):
 
 def class_stu_list(request,class_id):
     
-    print('in PC')
+    print('win7 edit teachers again')
     class_obj = crmmodels.ClassList.objects.get(id=class_id)
     return render(request,'teachers/class_stu_list.html',{'class_ojb':class_obj})
 
