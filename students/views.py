@@ -160,4 +160,5 @@ def payment(request):
                                                    })
 
 def studyrecord(request):
+    print('in PC again')
     return HttpResponse('正在开发...')
