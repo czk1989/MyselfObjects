@@ -84,10 +84,10 @@ DATABASES = {
     # },
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': '',
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',
+        'NAME': 'crm',
+        'USER': 'root',
+        'PASSWORD': '3Dian14/',
+        'HOST': '192.168.1.5',
         'PORT': '',
     },
 }
