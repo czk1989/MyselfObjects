@@ -84,7 +84,7 @@ DATABASES = {
     # },
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': '',
+        'NAME': 'crm',
         'USER': '',
         'PASSWORD': '',
         'HOST': '',
