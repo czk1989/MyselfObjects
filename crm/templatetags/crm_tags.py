@@ -36,7 +36,32 @@ def func_name(func_list, admin_class):
 
 @register.simple_tag
 def buile_table_header_column(admin_class,column,orderby_key,filter_condition):
-    return tag_base.buile_table_header_column(admin_class,column,orderby_key,filter_condition)
+    ele = "<a href='?{filter_condition}o={orderby_key}'>{column_name}</a>{img}"
+    x=''
+    for k,v in filter_condition.items():
+        x+='%s=%s&'%(k,v)
+
+    img=''
+    if orderby_key:
+        if orderby_key.strip('-')==column:
+            orderby_key=orderby_key
+            if orderby_key.startswith('-'):
+                img='<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>'
+            else:
+                img = '<span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>'
+        else:
+            orderby_key=column
+    else:
+        img=''
+        orderby_key=column
+    if hasattr(admin_class.models,str(column)):
+        column_name= admin_class.models._meta.get_field(column).verbose_name
+    else:
+        column_name=column
+    if column=='id':
+        column_name='序号'
+    ele=ele.format(filter_condition=x,orderby_key=orderby_key,column_name=column_name,img=img)
+    return mark_safe(ele)
 
 
 #显示数据库表需要列出来的详细信息
@@ -65,12 +90,13 @@ def show_table(obj,admin_class,request):
 
 # 判断显示列表的元素如果不在数据库表，那么可能在king_admin定义类的时候声明了对应名称的函数
         except FieldDoesNotExist as e:
-            if hasattr(admin_class,column):
-                column_func=getattr(admin_class,column)
-                admin_class.instance=obj
-                admin_class.request=request
-                column_data=column_func()
-                ret+='<td>%s</td>'%column_data
+            pass
+            # if hasattr(admin_class,column):
+            #     column_func=getattr(admin_class,column)
+            #     admin_class.instance=obj
+            #     admin_class.request=request
+            #     column_data=column_func()
+            #     ret+='<td>%s</td>'%column_data
     return mark_safe(ret)
 
 

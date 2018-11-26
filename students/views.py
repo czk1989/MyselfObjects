@@ -13,7 +13,7 @@ from crm import models as crmmodels
 
 def stu_login(request):
     
-    response=views_base.Login(request,'students').acc_login()
+    response=views_base.Login(request,'students','学生').acc_login()
     return response
 
 # @login_required(login_url="/student/login/")

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 
-{#网页头部#}
+    <!--网页头部-->
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,13 +22,13 @@
     </head>
 
 
-{#body#}
-        {% block body %}
 
-        {% endblock %}
+    <!--body-->
+    {% block body %}
 
+    {% endblock %}
 
-{#脚本#}
+    <!--js-->
     <script src="/static/kingadmin/js/ie-emulation-modes-warning.js"></script>
     <script src="/static/kingadmin/js/jquery.min.js"></script>
     <script src="/static/kingadmin/plugins/dropzone.js"></script>
@@ -38,7 +38,9 @@
     <script src="/static/kingadmin/js/jquery.bxslider.js"></script>
     <script src="/static/js/myjs.js"></script>
     <script src="/static/js/myjs.js"></script>
-        {% block script-list %}
-        {% endblock %}
+
+    {% block script-list %}
+
+    {% endblock %}
 
 </html>

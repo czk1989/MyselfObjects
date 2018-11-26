@@ -14,6 +14,8 @@
       {% endblock %}
 
       {% block menu-left %}
+
+          {% if menus %}
              {% for first_menu,second_menus in menus.items %}
                  <dl >
                       <dt id="menu" class="btn btn-link" name="{{ first_menu }}" >
@@ -26,32 +28,20 @@
                       {% endfor %}
                  </dl>
              {% endfor %}
+          {% else %}
+              <div>(空)</div>
+          {% endif %}
       {% endblock %}
 
 
       {% block menu-right %}
             <img src="/static/kingadmin/img/indexBanner.png" width="100%" height="100%" alt="">
-
       {% endblock %}
 
 
     {% block script-list %}
 
             <script>
-                {#$('dt#menu').each(function () {#}
-                {#    $(this).click(function () {#}
-                {#        var display = $(this).parent().find('dd').css('display');#}
-                {#        $(this).addClass('btn-success');#}
-                {#        if (display == 'block') {#}
-                {#            $(this).parent().find('dd').css({display: "none"});#}
-                {#            return false;#}
-                {#        } else {#}
-                {#            $(this).parent().find('dd').css({display: "block"});#}
-                {#            $(this).parent().siblings('dl').find('dd').css({display: "none"});#}
-                {#            return false;#}
-                {#        }#}
-                {#    })#}
-
             $(function () {
                 $.Menu();
             });
@@ -59,27 +49,3 @@
         {% block script-index %}
         {% endblock %}
     {% endblock %}
-
-                      <!--实现当前菜单栏不刷新，加载其他页面内容-->
-                <!--===================================================-->
-            {#$('dd a').each(function () {#}
-            {#    $(this).click(function () {#}
-            {#        var h = $(this).attr('href');#}
-            {#        $(this).addClass("btn-success btn-sm");#}
-            {#        $.ajax({#}
-            {#            url: $(this).attr('href'),#}
-            {#            post: 'GET',#}
-            {#            success: function (data) {#}
-            {#                $('div#menu-right').empty();#}
-            {#                $('div#menu-right').append(data);#}
-            {#                alert(data)#}
-            {#            },#}
-            {#            error: function () {#}
-            {#                alert('wramg');#}
-            {#            },#}
-            {##}
-            {#        });#}
-            {#        return false;#}
-            {#    });#}
-            {##}
-            {# })#}

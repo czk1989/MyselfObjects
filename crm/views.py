@@ -15,7 +15,7 @@ from king_admin import forms
 #展示销售角色能够查看的数据库表页面
 
 def crm_login(request):
-    response=views_base.Login(request,'crm').acc_login()
+    response=views_base.Login(request,'crm','销售').acc_login()
     return response
 
 @login_required(login_url="/crm/login/")
@@ -27,7 +27,7 @@ def crm_logout(request):
 @login_required(login_url="/crm/login/")
 def sales_home(request):
     login_seller=models.UserProfile.objects.get(email=request.user.email).roles.first()
-    seller=models.Role.objects.filter(name='sales').first()
+    seller=models.Role.objects.filter(name='sale').first()
     if login_seller==seller:
         menus=views_base.MenuList(request).shoumenus()
         return render(request, 'crm/sales_home.html',{'menus':menus})

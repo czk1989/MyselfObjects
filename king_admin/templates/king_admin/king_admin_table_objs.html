@@ -1,36 +1,26 @@
 {% extends 'king_admin/king_admin_index.html' %}
 {% load king_admin_tags %}
 
-
  {% block menu-navigation %}
-          <!--导航条-->
-    <!--===================================================-->
-
+      <!--导航条-->
       <ol class="breadcrumb" style="font-size: large">
           <li ><span href="" >{{ app_name }}</span></li>
           <li ><span id="table-name"><a href="/king_admin/{{ app_name }}/{{ table_name }}/">{% render_app_name admin_class %}</a></span></li>
-          {% block menu-add %}
 
+          {% block menu-add %}
+          <a class="navbar-right"  href="/king_admin/{{ app_name }}/{{ table_name }}/add/" style="margin-left: 40%">新增</a>
           {% endblock %}
       </ol>
-
-        {% block btn-add %}
-        <a class="navbar-right" style="position: relative;top: -50px;right: 50px" href="/king_admin/{{ app_name }}/{{ table_name }}/add/">新增</a>
-         {% endblock %}
 {% endblock %}
-
-
 
 {% block menu-right %}
 
-              <!--显示功能-->
-    <!--===================================================-->
+      <!--显示功能-->
       <div class="panel-body " style="overflow: auto" >
-            <form method="get" action="" style="margin-top: -15px;">
+            <form method="get" action="" >
                 {% csrf_token %}
 
-                          <!--查询检索栏-->
-                    <!--===================================================-->
+                <!--查询检索栏-->
                 {% if  admin_class.list_filters %}
                     <div class="row">
                           {% for condition in admin_class.list_filters %}
@@ -38,12 +28,10 @@
                                {% render_filter_eme  condition admin_class filter_condition %}
                           {% endfor %}
                           &nbsp;&nbsp;<button type="submit" class="btn btn-primary btn-sm">检索</button>
-{#                          &nbsp;&nbsp; <button type="button" id="reset" class="btn btn-primary btn-sm">重置</button>#}
-
                     </div>
                 {% endif %}
-                          <!--关键字搜索栏-->
-                    <!--===================================================-->
+
+                <!--关键字搜索栏-->
                 <div class="row" >
                       <div class="col-lg-2" style="display: inline-block;">
                           <input name="_q" type="text" class='form-control input-sm' placeholder="{% for i in admin_class.list_search %}{% search_name i admin_class %}&nbsp;{% endfor %}" value="{{ search_key }}">
@@ -52,11 +40,11 @@
                   </div>
             </form>
             <br>
-                      <!--自定义action功能选项-->
-                <!--===================================================-->
+
+            <!--自定义action功能选项-->
             <form class="row col-lg-2" action="" method="post" onsubmit="return ActionSubmit(this)" id="Addfieldsid">
                 {% csrf_token %}
-                <select class='btn-sm form-group ' name="action" id="select-value" style="display: inline-block; width: 200px">
+                <select class='btn-sm form-group ' name="action" id="select-value" style="display: inline-block;">
                     <option value="">-------------------------</option>
                     {% for func_list in admin_class.list_action %}
                         <option value="{{ func_list}}">{% func_name func_list admin_class %}</option>
@@ -65,16 +53,13 @@
                 &nbsp;&nbsp;<button type="submit" class=" btn btn-sm"  >Go</button>
             </form>
 
-
-                        <!--显示内容-->
-                <!--===================================================-->
+            <!--显示内容-->
             <table class="table table-hover">
 
-                        <!--显示标题并实现排序功能-->
-                <!--===================================================-->
+                <!--显示标题并实现排序功能-->
                 <thead>
                       <tr class="breadcrumb">
-                      <th style="width: 20px">
+                      <th style="max-width: 20px">
                           <input  type="checkbox" id="all-choiced">
                       </th>
                       {% for column in admin_class.list_display %}
@@ -85,8 +70,7 @@
                       </tr>
                 </thead>
 
-                    <!--显示数据字段详细信息-->
-              <!--===================================================-->
+                <!--显示数据字段详细信息-->
                 <tbody>
                       <a href="" ></a>
                       {% for obj in query_sets %}
@@ -100,12 +84,10 @@
                 </tbody>
             </table>
 
-          <!--统计-->
-      <!--===================================================-->
+            <!--统计-->
             <p>总计{{ query_sets.paginator.count }}条记录</p>
 
           <!--分页栏-->
-      <!--===================================================-->
           <div class="pagination">
               <nav aria-label="...">
                   <ul class="pagination">
@@ -118,7 +100,7 @@
 {% endblock %}
 
 
- {#实现左侧菜单栏不变动#}
+{#实现左侧菜单栏不变动#}
 {% block script-index %}
     <script>
         $("dt[name='{{ app_name }}']").siblings('dd').css({display:"block"});

@@ -6,7 +6,7 @@ from crm import models as crmmodels
 
 
 def teacher_login(request):
-    response=views_base.Login(request,'teachers').acc_login()
+    response=views_base.Login(request,'teachers','讲师').acc_login()
     return response
 
 def teacher_logout(request):

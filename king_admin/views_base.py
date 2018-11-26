@@ -11,13 +11,12 @@ from king_admin import forms
 class MenuList(object):
     def __init__(self,request):
         self.request=request
-        self.firstmenu=None
 
     def shoumenus(self):
         menus={}
         try:
-            self.firstmenus=models.UserProfile.objects.filter(email=self.request.user.email).first().roles.first().menus.all()
-            for firstmenu in self.firstmenus:
+            firstmenus=models.UserProfile.objects.filter(email=self.request.user.email).first().roles.first().menus.all()
+            for firstmenu in firstmenus:
                 menus[firstmenu]=firstmenu.sub_menus.all()
             return menus
         except Exception as e:
@@ -25,6 +24,7 @@ class MenuList(object):
     def adminmenus(self):
         table_list=king_admin_base.site.enabled_admin
         menus={}
+        print(len(menus))
         tablemenus={}
         for app_name,table_objs in table_list.items():
             for k,admin in table_objs.items():
@@ -33,7 +33,11 @@ class MenuList(object):
                 tablemenus[table_name]=table_url
             menus[app_name]=tablemenus
             tablemenus={}
-        return menus
+        print(len(menus))
+        if len(menus) < 1:
+            return False
+        else:
+            return menus
 
 
 class TableDisplay(object):
@@ -48,10 +52,8 @@ class TableDisplay(object):
             if self.table_name in king_admin_base.site.enabled_admin[self.app_name]:
                 admin_class = king_admin_base.site.enabled_admin[self.app_name][self.table_name]
                 object_list, filter_condition = util.table_utils(self.request, admin_class)
-
                 object_list, orderby_key = util.table_order(self.request, object_list)
                 object_list, search_key = util.table_search(self.request, object_list, admin_class)
-                print(object_list)
                 if self.embed:
                     menus=MenuList(self.request).adminmenus()
                 else:
@@ -86,9 +88,10 @@ class TableDisplay(object):
             return False
 
 class Login(object):
-    def __init__(self,request,app_name):
+    def __init__(self,request,app_name,role):
         self.request=request
         self.app_name=app_name
+        self.role=role
 
     def acc_login(self):
         errors={}
@@ -108,7 +111,7 @@ class Login(object):
                     errors['error']='Wrong user or password'
             else:
                 errors['error'] = '验证码错误'
-        return render(self.request, '%s/login.html'%self.app_name, {'errors':errors})
+        return render(self.request, '%s/login.html'%self.app_name, {'errors':errors,'role':self.role})
 
 
 class TableChange(object):
@@ -205,7 +208,8 @@ class CreatAccount(object):
                 account_fin.is_staff = self.is_staff
                 account_fin.roles.add(models.Role.objects.filter(name=self.role).first())
                 account_fin.save()
-                models.Customer.objects.create(name=account_obj.instance.name,email=account_obj.instance.email,)
+                if not models.Customer.objects.filter(email=account_obj.instance.email).first():
+                    models.Customer.objects.create(name=account_obj.instance.name,email=account_obj.instance.email,)
                 customer_data=models.Customer.objects.get(email=account_obj.instance.email)
                 user_data=account_fin
                 return_list=[user_data,customer_data]

@@ -1,4 +1,4 @@
-{% extends 'home.html' %}
+{% extends 'home_base.html' %}
 
 {#{% block tag %}#}
 {#{% load crm_tags %}#}
@@ -13,6 +13,6 @@
             <li class="active"><a href="/teachers/">讲师首页<span class="sr-only">(可以隐藏)</span></a></li>
           </ul>
           <ul class="nav nav-sidebar">
-                 <li id="menu"><a href="/teachers/my_class/">我的课程</a></li>
+                 <li id="menu" class="active"><a href="/teachers/my_class/">我的课程</a></li>
           </ul>
 {% endblock %}

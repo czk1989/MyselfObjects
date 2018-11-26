@@ -155,12 +155,13 @@ def built_table_row(obj,admin_class,request):
 
         # 判断显示列表的元素如果不在数据库表，那么可能在king_admin定义类的时候声明了对应名称的函数
         except FieldDoesNotExist as e:
-            if hasattr(admin_class,column):
-                column_func=getattr(admin_class,column)
-                admin_class.instance=obj
-                admin_class.request=request
-                column_data=column_func()
-                ret+='<td>%s</td>'%column_data
+            pass
+            # if hasattr(admin_class,column):
+            #     column_func=getattr(admin_class,column)
+            #     admin_class.instance=obj
+            #     admin_class.request=request
+            #     column_data=column_func()
+            #     ret+='<td>%s</td>'%column_data
     return mark_safe(ret)
 
 

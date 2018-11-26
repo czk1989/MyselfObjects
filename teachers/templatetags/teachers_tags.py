@@ -39,7 +39,7 @@ def get_study_record_count(enroll_obj):
 
 @register.simple_tag
 def fetch_stu_course_score(class_grade_dic, enroll_obj ):
-    print(class_grade_dic,enroll_obj.customer.id )
+
     return class_grade_dic.get(enroll_obj.customer.id)
 
 @register.simple_tag

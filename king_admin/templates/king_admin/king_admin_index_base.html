@@ -32,7 +32,7 @@
     <div class="container-fluid">
          <div class="row">
 
-              <div class=" col-sm-3 col-md-2 sidebar" >
+              <div class=" col-sm-3 col-md-2 sidebar" style="display: inline">
                   <div>
                       <a href="/king_admin/" style="font-size: larger;color: black">首页</a>
                   </div>
@@ -45,9 +45,9 @@
 
                       <!--右侧页面-->
                 <!--===================================================-->
-              <div class=" col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+              <div class=" col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" style="display: inline-block">
                     <div class="row" >
-                        <div class="panel panel-info" style="height: 500px;" >
+                        <div class="panel panel-info" style="max-height: 480px;" >
                       <!--右侧导航栏部分-->
                 <!--===================================================-->
                              {% block menu-navigation %}
@@ -55,7 +55,7 @@
                              {% endblock %}
                        <!--右侧内容部分-->
                 <!--===================================================-->
-                             <div style="height: 440px;overflow: auto">
+                             <div style="max-height: 440px;overflow: auto">
                                 {% block menu-right %}
 
                                 {% endblock %}

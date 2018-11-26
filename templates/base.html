@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 
-{#网页头部#}
+    <!--网页头部-->
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -37,8 +37,7 @@
 
           <div id="navbar" class="navbar-collapse collapse">
 
-                    <!--头部右侧登陆框-->
-		<!--===================================================-->
+                <!--头部右侧登录框-->
                 {% block title-login %}
 
                 {% endblock %}
@@ -49,13 +48,12 @@
         </div>
     </nav>
 
-
+    <!--body-->
     {% block body %}
 
     {% endblock %}
 
-
-
+    <!--js-->
     <script src="/static/js/ie-emulation-modes-warning.js"></script>
     <script src="/static/js/jquery.min.js"></script>
     <script src="/static/plugins/dropzone.js"></script>
@@ -64,10 +62,9 @@
     <script src="/static/js/ie10-viewport-bug-workaround.js"></script>
     <script src="/static/js/jquery.bxslider.js"></script>
 
+    {% block script-list %}
 
-        {% block script-list %}
-
-        {% endblock %}
+    {% endblock %}
 
 </body>
 </html>

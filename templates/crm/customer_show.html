@@ -11,7 +11,7 @@
     {% csrf_token %}
     {{ form_obj.errors }}
           {% for foo in form_obj %}
-                <div class="form-group" style="margin: 10px ">
+                <div class="form-group" >
                     <label for="inputEmail3" class="col-sm-2 control-label">{{ foo.label }}</label>
                     {% if foo.name in admin_class.filter_horizontal %}
 {#   列出对应数据列表的所有可选字段(除去默认应选中的字段)#}
@@ -24,7 +24,7 @@
                             </select>
                         </div>
                         <div class=" col-sm-2 " style="height: 150px;width:30px;margin-left: 40px;text-align: center;">
-                            <button class="glyphicon glyphicon-arrow-right btn-link" aria-hidden="true" style="margin: 35px 0"></button>
+                            <button class="glyphicon glyphicon-arrow-right btn-link" aria-hidden="true" ></button>
                             <button class="glyphicon glyphicon-arrow-left btn-link" aria-hidden="true"></button>
                         </div>
 
