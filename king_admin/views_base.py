@@ -2,11 +2,14 @@
 from django.shortcuts import HttpResponseRedirect, render,redirect
 from django.contrib.auth import login,authenticate
 from django.core.cache import cache
+import datetime,os,random,string
+from django.conf import settings
 from django.core.paginator import Paginator
 from king_admin import king_admin_base
 from king_admin import util
 from crm import models
 from king_admin import forms
+from backconf import verification
 
 class MenuList(object):
     def __init__(self,request):
@@ -94,6 +97,19 @@ class Login(object):
         self.role=role
 
     def acc_login(self):
+
+        # today_str = datetime.date.today().strftime("%Y%m%d")
+        # verify_code_img_path = r"%s\%s" % (settings.VERIFICATION_CODE_IMGS_DIR,
+        #                                   today_str)
+        # if not os.path.isdir(verify_code_img_path):
+        #     os.makedirs(verify_code_img_path, exist_ok=True)
+        # # print("session:", request.session.session_key)
+        # # print("session:",request.META.items())
+        # random_filename = "".join(random.sample(string.ascii_lowercase, 4))
+        # random_code = verification.gene_code(verify_code_img_path, random_filename)
+        # cache.set(random_filename, random_code, settings.REDIS_TIMEOUT_VERIF)
+
+
         errors={}
         if self.request.method == "POST":
             _name=self.request.POST.get('email')

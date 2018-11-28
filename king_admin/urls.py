@@ -12,5 +12,6 @@ urlpatterns = [
     re_path('^(?P<app_name>\w+)/(?P<table_name>\w+)/(?P<num>\d+)/change/password/$', views.edit_password,name='change_pwd'),
     re_path('^(?P<app_name>\w+)/(?P<table_name>\w+)/(?P<obj_id>\w+)/delete/$', views.field_delete,name='obj_field_delete'),
     re_path('^(?P<app_name>\w+)/(?P<table_name>\w+)/add/$', views.table_obj_add,name='table_obj_add'),
+    re_path('^test/$', views.test),
 
 ]

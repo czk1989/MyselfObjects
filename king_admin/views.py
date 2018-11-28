@@ -11,7 +11,9 @@ from django.core.cache import cache
 from king_admin import util
 from king_admin.permissions.permission import check_permission
 from king_admin import views_base
+from backconf import redis_conf
 
+REDIS_CONN=redis_conf.redis_conn()
 
 def acc_login(request):
     response=views_base.Login(request,'king_admin','管理员').acc_login()
@@ -127,3 +129,12 @@ def table_obj_add(request,app_name,table_name):
         return render(request, 'king_admin/king_admin_table_objs_add.html', return_data)
     else:
         return return_data
+
+
+from backconf import verification
+import json
+def test(request):
+    text=verification.gene_code()
+    img=REDIS_CONN.get(text)
+    return render(request,'king_admin/test1.html',{'text':text,
+                                                   'img':json.loads(img)})
