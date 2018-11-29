@@ -1,11 +1,11 @@
 
 from PIL import Image,ImageDraw,ImageFont,ImageFilter
 import random
-import os,json
+import os
 import math, string
-from backconf import redis_conf
+from backconf import redis_cli
 
-REDIS_CONN=redis_conf.redis_conn()
+REDIS_CONN=redis_cli.redis_conn()
 DIR=os.path.dirname(os.path.abspath(__file__))
 #字体的位置，不同版本的系统会有不同
 font_path=os.path.join(DIR,r'fonts\arial.ttf')
@@ -43,31 +43,24 @@ def gene_line(draw,width,height):
     end = (random.randint(0, width), random.randint(0, height))
     draw.line([begin, end], fill = linecolor)
 
-def gene_code():
+def gene_code(save_path,filename):
     width,height = size #宽和高
     image = Image.new('RGBA',(width,height),bgcolor) #创建图片
     font = ImageFont.truetype(font_path,25) #验证码的字体和字体大小
     draw = ImageDraw.Draw(image) #创建画笔
     text = gen_text() #生成字符串
-    # print(text)
     font_width, font_height = font.getsize(text)
     draw.text(((width - font_width) / number, (height ) / number),text,font= font,fill=fontcolor) #填充字符串
-
     if draw_line:
         gene_line(draw, width, height)
         gene_line(draw, width, height)
         gene_line(draw, width, height)
-
     image = image.transform((width + 20, height +10), Image.AFFINE, (1, -0.5, 0, -0.1, 1, 0), Image.BILINEAR)  # 创建扭曲
     image = image.filter(ImageFilter.EDGE_ENHANCE_MORE)  # 滤镜，边界加强
-    # image.save('%s/%s.png' %(save_path,filename))  # 保存验证码图片
-    # print("savepath:",save_path)
-    REDIS_CONN.set('%s'%text,json.dumps(image),15)
-
+    image.save(r'%s\%s.png' %(save_path,filename))  # 保存验证码图片
     return text
 
-# if __name__ == "__main__":
-#     gene_code(os.path.join(DIR,r'img'),'test1') #会把生成的图片存成/tmp/test.png
+
 
 
 

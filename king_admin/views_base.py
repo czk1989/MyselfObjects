@@ -1,15 +1,18 @@
 
 from django.shortcuts import HttpResponseRedirect, render,redirect
 from django.contrib.auth import login,authenticate
-from django.core.cache import cache
 import datetime,os,random,string
-from django.conf import settings
+from MyselfObjects import settings
 from django.core.paginator import Paginator
 from king_admin import king_admin_base
 from king_admin import util
 from crm import models
 from king_admin import forms
-from backconf import verification
+from backconf import verification,redis_cli
+import shutil,uuid
+
+
+REDIS_CONN=redis_cli.redis_conn()
 
 class MenuList(object):
     def __init__(self,request):
@@ -27,7 +30,7 @@ class MenuList(object):
     def adminmenus(self):
         table_list=king_admin_base.site.enabled_admin
         menus={}
-        print(len(menus))
+        # print(len(menus))
         tablemenus={}
         for app_name,table_objs in table_list.items():
             for k,admin in table_objs.items():
@@ -36,7 +39,6 @@ class MenuList(object):
                 tablemenus[table_name]=table_url
             menus[app_name]=tablemenus
             tablemenus={}
-        print(len(menus))
         if len(menus) < 1:
             return False
         else:
@@ -97,27 +99,20 @@ class Login(object):
         self.role=role
 
     def acc_login(self):
-
-        # today_str = datetime.date.today().strftime("%Y%m%d")
-        # verify_code_img_path = r"%s\%s" % (settings.VERIFICATION_CODE_IMGS_DIR,
-        #                                   today_str)
-        # if not os.path.isdir(verify_code_img_path):
-        #     os.makedirs(verify_code_img_path, exist_ok=True)
-        # # print("session:", request.session.session_key)
-        # # print("session:",request.META.items())
-        # random_filename = "".join(random.sample(string.ascii_lowercase, 4))
-        # random_code = verification.gene_code(verify_code_img_path, random_filename)
-        # cache.set(random_filename, random_code, settings.REDIS_TIMEOUT_VERIF)
-
-
+        today_str = datetime.date.today().strftime("%Y%m%d")
+        verify_code_img_path = r"%s\%s" % (settings.VERIFICATION_CODE_IMGS_DIR,today_str)
+        if not os.path.isdir(verify_code_img_path):
+            os.makedirs(verify_code_img_path, exist_ok=True)
+        random_filename = "".join(random.sample(string.ascii_lowercase, 4))
+        random_code = verification.gene_code(verify_code_img_path, random_filename)
+        REDIS_CONN.set(random_filename,random_code,settings.REDIS_TIMEOUT_VERIF)
         errors={}
         if self.request.method == "POST":
             _name=self.request.POST.get('email')
             _password=self.request.POST.get('password')
-            #_verify_code和_verify_code_key暂时还未设置，为None
             _verify_code = self.request.POST.get('verify_code')
             _verify_code_key=self.request.POST.get('verify_code_key')
-            if cache.get(_verify_code_key) == _verify_code:
+            if str(REDIS_CONN.get(_verify_code_key),encoding='utf8').upper()==_verify_code.upper():
                 user = authenticate(username=_name, password=_password)
                 if user:
                     login(self.request,user)
@@ -127,7 +122,10 @@ class Login(object):
                     errors['error']='Wrong user or password'
             else:
                 errors['error'] = '验证码错误'
-        return render(self.request, '%s/login.html'%self.app_name, {'errors':errors,'role':self.role})
+        return render(self.request, '%s/login.html'%self.app_name, {'errors':errors,
+                                                                    'role':self.role,
+                                                                    "filename": random_filename,
+                                                                    "today_str": today_str,})
 
 
 class TableChange(object):
