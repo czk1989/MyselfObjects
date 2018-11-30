@@ -1,0 +1,81 @@
+
+{% extends 'base.html' %}
+
+    {% block tabel-css %}
+
+                 <style>
+                   H4{
+                       text-indent: 2em;
+                   }
+                 </style>
+    {% endblock %}
+
+{% block body %}
+
+{#<body>#}
+{#body头部#}
+   <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+          <div class="navbar-header">
+              <p class="navbar-brand" href="">Myobjects</p>
+          </div>
+
+      </div>
+   </nav>
+
+{#body中上部#}
+
+   <div class="jumbotron" style="padding-top: 20px;padding-bottom: 20px">
+      <div class="container">
+          <h2>个人网站声明：</h2>
+          <h4>
+               <strong>This is the display area for personal website design. Please do not delete the existing content at will,
+            but you can register and log in, add or delete the data you have entered, and you can view the content of the website at will.
+            If you find a bug, please feel free to contact the webmaster @, thank you!
+               </strong>
+          </h4>
+          <h4>这是个人网站设计的展示区，请不要随意删除已有内容，但是可以注册登录，增删自己录入的数据，可以随意查看网站内容。如有发现bug，请随时联系站长本人@，谢谢！</h4>
+      </div>
+   </div>
+
+{#body中下部#}
+    <div class="container">
+        <div class="row" style="margin-top: -25px">
+            <ul class="bxslider">
+
+                <li style="text-align: center">
+                    <p style="display: inline-block;margin: 0 30px;"><a href="/accounts/login_choice/" ><img src="/static/img/2.jpg" class="img-circle " width="250" height="250"/><strong>网络培训CRM管理系统</strong></a></p>
+                    <p style="display: inline-block;margin: 0 30px;"><a href="" ><img src="/static/img/1.jpg" class="img-circle " width="250" height="250"/><strong>其他</strong></a></p>
+                    <p style="display: inline-block;margin: 0 30px;"><a href="" ><img src="/static/img/3.jpg" class="img-circle " width="250" height="250"/><strong>分布式监控系统后台入口</strong></a></p>
+                </li>
+
+                <li style="text-align: center">
+                    <p style="display: inline-block;margin: 0 30px;"><a href="" ><img src="/static/img/U10729P693DT20140517155919.jpg" class="img-circle " width="250" height="250"/><strong>门户网站暂未开发</strong></a></p>
+                    <p style="display: inline-block;margin: 0 30px;"><a href="" ><img src="/static/img/VersaillesGhosts_ZH-CN11794136165_1920x1080.jpg" class="img-circle " width="250" height="250"/><strong>正在开发</strong></a></p>
+                    <p style="display: inline-block;margin: 0 30px;"><a href="" ><img src="/static/img/201161613210543778070.jpg" class="img-circle " width="250" height="250"/><strong>正在开发</strong></a></p>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+{#</body>#}
+
+{#网页底部#}
+<footer>
+    <div style="text-align: center;">
+        <p>© 2018 Company...</p>
+    </div>
+</footer>
+
+{% endblock %}
+
+{% block script-list %}
+
+    <script>
+    $(function(){
+    $('.bxslider').bxSlider({
+        auto:true,
+    });
+});
+    </script>
+{% endblock %}

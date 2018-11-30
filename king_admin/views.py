@@ -1,40 +1,24 @@
 from king_admin import king_admin_base
-from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import HttpResponse
 from django.shortcuts import render,Http404
-from django.shortcuts import HttpResponseRedirect
 from django.shortcuts import redirect
 from king_admin import forms
-from django.contrib.auth import login,authenticate,logout
-from django.core.cache import cache
-from king_admin import util
 from king_admin.permissions.permission import check_permission
 from king_admin import views_base
 from backconf import redis_cli
 
 REDIS_CONN=redis_cli.redis_conn()
 
-def acc_login(request):
-    response=views_base.Login(request,'king_admin','管理员').acc_login()
-    return response
 
 
-@login_required(login_url="/king_admin/login/")
-def acc_logout(request):
-    logout(request)
-    return redirect('/king_admin/login/')
-
-
-
-@login_required(login_url="/king_admin/login/")
+@login_required(login_url="/accounts/king_admin/login/")
 def app_index(request):
     menus=views_base.MenuList(request).adminmenus()
     return render(request, 'king_admin/king_admin_index.html',{'menus':menus})
 
 
 
-@login_required(login_url="/king_admin/login/")
+@login_required(login_url="/accounts/king_admin/login/")
 @check_permission
 def table_objs_display(request,app_name,table_name):
     return_data=views_base.TableDisplay(request,app_name,table_name,embed=True).show_table()
@@ -47,7 +31,7 @@ def table_objs_display(request,app_name,table_name):
         raise Http404("url %s/%s not found" % (app_name, table_name))
 
 
-@login_required(login_url="/king_admin/login/")
+@login_required(login_url="/accounts/king_admin/login/")
 def edit_table(request,app_name,table_name,num):
     return_data=views_base.TableChange(request, app_name, table_name, num,embed=True,edit=True).edittable()
     if type(return_data) is dict:
@@ -57,7 +41,7 @@ def edit_table(request,app_name,table_name,num):
         return return_data
 
 
-@login_required(login_url="/king_admin/login/")
+@login_required(login_url="/accounts/king_admin/login/")
 def edit_password(request,app_name,table_name,num):
     admin_class = king_admin_base.site.enabled_admin[app_name][table_name]
     obj=admin_class.models.objects.get(id=num)
@@ -86,7 +70,7 @@ def edit_password(request,app_name,table_name,num):
 
 
 
-@login_required(login_url="/king_admin/login/")
+@login_required(login_url="/accounts/king_admin/login/")
 def field_delete(request,app_name,table_name,obj_id):
     admin_class = king_admin_base.site.enabled_admin[app_name][table_name]
     if not obj_id.isdigit():
@@ -122,7 +106,7 @@ def field_delete(request,app_name,table_name,obj_id):
 
 
 
-@login_required(login_url="/king_admin/login/")
+@login_required(login_url="/accounts/king_admin/login/")
 def table_obj_add(request,app_name,table_name):
     return_data=views_base.DataAdd(request,app_name,table_name,embed=True).add_data()
     if type(return_data) is dict:

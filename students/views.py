@@ -1,25 +1,9 @@
 from django.shortcuts import render,redirect
 from django.shortcuts import HttpResponse
-from django.contrib.auth import login,authenticate,logout
-from django.contrib.auth.decorators import login_required
-from django.db.utils import IntegrityError
 from king_admin import views_base
 from students import models
 from students import forms
-from students import util
 from crm import models as crmmodels
-
-
-
-def stu_login(request):
-    
-    response=views_base.Login(request,'students','学生').acc_login()
-    return response
-
-# @login_required(login_url="/student/login/")
-def stu_logout(request):
-    logout(request)
-    return redirect('/students/login/')
 
 
 def registered(request):
@@ -40,9 +24,9 @@ def stu_index(request):
     stu=crmmodels.Role.objects.filter(name='students').first()
     if login_stu==stu:
         menus=views_base.MenuList(request).shoumenus()
-        return render(request, 'students/students_home.html',{'menus':menus})
+        return render(request, 'students/stu_index.html', {'menus':menus})
     else:
-        errors='非销售人员无法登录该后台系统'
+        errors='非学员无法登录该后台系统'
         return render(request,'page_403.html',{'app_name':'crm','errors':errors})
 
 
@@ -62,7 +46,7 @@ def classlist(request):
         'course_display':course_display,
         'stu_enroll_dict':stu_enroll_dict
         }
-    return render(request,'students/course_list.html',data)
+    return render(request, 'students/stu_course_list.html', data)
 
 
 
@@ -75,9 +59,9 @@ def my_course(request):
         for stu_enroll in stu_enrolls:
             if stu_enroll.contract_approved:
                 stu_classlist.append(stu_enroll.enrolled_class)
-    return render(request,'students/my_course.html',{'menus':menus,
+    return render(request, 'students/stu_my_course.html', {'menus':menus,
                                                      'stu_classlist':stu_classlist,
-                                                     })
+                                                           })
 
 
 def enrollment(request,classlist_id):
@@ -98,17 +82,17 @@ def enrollment(request,classlist_id):
         if crmmodels.Enrollment.objects.filter(customer=customer).first():
             enroll_id=crmmodels.Enrollment.objects.filter(customer=customer).first().id
             return redirect('/students/payment/%s/'%enroll_id)
-    return render(request, 'students/enrollment.html', {'enroll_form':enroll_form,
+    return render(request, 'students/stu_enrollment.html', {'enroll_form':enroll_form,
                                                    'customer_name':customer.name,
                                                    'customer_email':customer.email,
                                                    'enrollclass':enrollclass,
                                                    'msg':msg,
                                                    'request':request,
                                                     'menus':menus,
-                                                        'branch':branch,
-                                                        'course':course,
-                                                        'template':template
-                                                        })
+                                                            'branch':branch,
+                                                            'course':course,
+                                                            'template':template
+                                                            })
 
 
 def pay(request,enroll_id):
@@ -140,7 +124,7 @@ def pay(request,enroll_id):
                 msg='请输入正确的格式'
         else:
             msg='SB，想黑我,去你妹的...'
-    return render(request, 'students/pay.html', {'enroll_obj':enroll_obj,
+    return render(request, 'students/stu_pay.html', {'enroll_obj':enroll_obj,
                                                      'msg':msg,
                                                      'menus':menus,
                                                      'payment_form':payment_form,
@@ -161,4 +145,5 @@ def payment(request):
                                                    })
 
 def studyrecord(request):
+
     return HttpResponse('正在开发...')

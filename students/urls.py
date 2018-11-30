@@ -1,12 +1,9 @@
 
-from django.contrib import admin
-from django.urls import path,include,re_path
+from django.urls import path,re_path
 from students import views
 app_name='students'
 urlpatterns = [
     re_path('^$',views.stu_index,name='stu_index'),
-    re_path('^login/$', views.stu_login, name='stu_login'),
-    re_path('^logout/$', views.stu_logout, name='stu_logout'),
     re_path('^registered/$', views.registered, name='stu_registered'),
     re_path('^jump/$', views.jump),
     re_path('^classlist/$', views.classlist,name='classlist'),

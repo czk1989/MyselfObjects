@@ -1,11 +1,8 @@
-{% extends 'home_base.html' %}
+{% extends 'index_base.html' %}
 
-{#{% block tag %}#}
-{#{% load crm_tags %}#}
-{#{% endblock %}#}
 
 {% block logout %}
-      <li><a href="{% url 'teachers:teacher_logout' %} ">注销</a></li>
+      <li><a href="{% url 'home' %} ">注销</a></li>
 {% endblock %}
 
 {% block menu_left %}

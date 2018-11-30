@@ -1,20 +1,22 @@
 {% extends 'base.html' %}
 
 {% block body %}
-    <div class="container" style="max-width: 300px">
+
+    <div class="container" style="max-width: 350px">
         <form class="form-signin" method="post">
               {% csrf_token %}
-            <h2 class="form-signin-heading">{{ role }}登陆界面</h2>
-
-            <label for="email" class="sr-only">Email address</label>
+            <h2 class="form-signin-heading">{{ role }}登录:</h2>
             <input type="email" name="email" class="form-control" placeholder="Email address" >
-              <br>
-
-            <label for="password" class="sr-only">Password</label>
+            <br>
+{#            <label for="password" class="sr-only">Password</label>#}
             <input type="password" name="password" class="form-control" placeholder="Password" >
-
+            <a href="."><img  src="/static/verif_img/{{ filename }}.png">刷新</a>
+            <br>
+            <input  type="text" name="verify_code" class="form-control" placeholder="验证码">
+            <br>
+            <input  type="hidden" name="verify_code_key" value="{{ filename }}" >
             {% if errors  %}
-                <span style="color: red">{{errors.error }}</span>
+                <span style="color: red">{{errors}}</span>
             {% endif %}
 
             <div class="item">
@@ -24,13 +26,11 @@
                 </p>
             </div>
             <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
-
+            <br>
+            {% if app_name == 'students' %}
+            <a href="/students/registered/"><button class="btn btn-lg  btn-block" type="submit">注册</button></a>
+            {% endif %}
         </form>
-
-        <br>
-            {% block registered %}
-
-            {% endblock %}
         <br>
     </div>
 {% endblock %}

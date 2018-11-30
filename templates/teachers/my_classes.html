@@ -1,4 +1,4 @@
-{% extends 'teachers/teachers_home.html' %}
+{% extends 'teachers/teachers_index.html' %}
 {% load crm_tags %}
 
 {% block menu-navigation %}
@@ -42,7 +42,8 @@
                             <td>
                                 <a class="btn-link" href="{% url 'teachers:class_stu_list' class_obj.id %}">{{ class_obj.enrollment_set.select_related.count }}</a>
                             </td>
-                            <td><a class="btn-link" href="/king_admin/?course={{ class_obj.id }}">上课纪录</a></td>
+{#                            <td><a class="btn-link" href="/king_admin/?course={{ class_obj.id }}">上课纪录</a></td>#}
+                            <td><a class="btn-link" href="">上课纪录</a></td>
                         </tr>
                         {% endfor %}
 

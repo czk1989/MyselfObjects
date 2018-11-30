@@ -9,7 +9,7 @@ from king_admin import util
 from crm import models
 from king_admin import forms
 from backconf import verification,redis_cli
-import shutil,uuid
+import shutil,uuid,os
 
 
 REDIS_CONN=redis_cli.redis_conn()
@@ -92,40 +92,38 @@ class TableDisplay(object):
         else:
             return False
 
-class Login(object):
-    def __init__(self,request,app_name,role):
-        self.request=request
-        self.app_name=app_name
-        self.role=role
-
-    def acc_login(self):
-        today_str = datetime.date.today().strftime("%Y%m%d")
-        verify_code_img_path = r"%s\%s" % (settings.VERIFICATION_CODE_IMGS_DIR,today_str)
-        if not os.path.isdir(verify_code_img_path):
-            os.makedirs(verify_code_img_path, exist_ok=True)
-        random_filename = "".join(random.sample(string.ascii_lowercase, 4))
-        random_code = verification.gene_code(verify_code_img_path, random_filename)
-        REDIS_CONN.set(random_filename,random_code,settings.REDIS_TIMEOUT_VERIF)
-        errors={}
-        if self.request.method == "POST":
-            _name=self.request.POST.get('email')
-            _password=self.request.POST.get('password')
-            _verify_code = self.request.POST.get('verify_code')
-            _verify_code_key=self.request.POST.get('verify_code_key')
-            if str(REDIS_CONN.get(_verify_code_key),encoding='utf8').upper()==_verify_code.upper():
-                user = authenticate(username=_name, password=_password)
-                if user:
-                    login(self.request,user)
-                    # request.session.set_expiry(60 * 600)
-                    return HttpResponseRedirect(self.request.GET.get("next") if self.request.GET.get("next") else "/%s/"%self.app_name)
-                else:
-                    errors['error']='Wrong user or password'
-            else:
-                errors['error'] = '验证码错误'
-        return render(self.request, '%s/login.html'%self.app_name, {'errors':errors,
-                                                                    'role':self.role,
-                                                                    "filename": random_filename,
-                                                                    "today_str": today_str,})
+# class Login(object):
+#     def __init__(self,request,app_name,role):
+#         self.request=request
+#         self.app_name=app_name
+#         self.role=role
+#
+#     def acc_login(self):
+#         file_name=str(uuid.uuid4())
+#         shutil.rmtree(settings.VERIFICATION_CODE_IMGS_DIR)
+#         os.mkdir(settings.VERIFICATION_CODE_IMGS_DIR)
+#         random_code = verification.gene_code(settings.VERIFICATION_CODE_IMGS_DIR, file_name)
+#         REDIS_CONN.set(file_name,random_code,settings.REDIS_TIMEOUT_VERIF)
+#         errors={}
+#         if self.request.method == "POST":
+#             _name=self.request.POST.get('email')
+#             _password=self.request.POST.get('password')
+#             _verify_code = self.request.POST.get('verify_code')
+#             _verify_code_key=self.request.POST.get('verify_code_key')
+#             if str(REDIS_CONN.get(_verify_code_key),encoding='utf8').upper()==_verify_code.upper():
+#                 user = authenticate(username=_name, password=_password)
+#                 if user:
+#                     login(self.request,user)
+#                     # request.session.set_expiry(60 * 600)
+#                     return HttpResponseRedirect(self.request.GET.get("next") if self.request.GET.get("next") else "/%s/"%self.app_name)
+#                 else:
+#                     errors['error']='Wrong user or password'
+#             else:
+#                 errors['error'] = '验证码错误'
+#         return render(self.request, '%s/login.html'%self.app_name, {'errors':errors,
+#                                                                     'role':self.role,
+#                                                                     "filename": file_name,
+#                                                                     })
 
 
 class TableChange(object):
