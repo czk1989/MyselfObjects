@@ -5,7 +5,7 @@ app_name='students'
 urlpatterns = [
     re_path('^$',views.stu_index,name='stu_index'),
     re_path('^registered/$', views.registered, name='stu_registered'),
-    re_path('^jump/$', views.jump),
+    re_path('^jump/$', views.jump,name='jump'),
     re_path('^classlist/$', views.classlist,name='classlist'),
     re_path('^my_course/$', views.my_course,name='my_course'),
     re_path('^payment/$', views.payment,name='payment'),

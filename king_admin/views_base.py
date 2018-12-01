@@ -4,6 +4,7 @@ from django.contrib.auth import login,authenticate
 import datetime,os,random,string
 from MyselfObjects import settings
 from django.core.paginator import Paginator
+from django.contrib.auth.models import Group
 from king_admin import king_admin_base
 from king_admin import util
 from crm import models
@@ -219,6 +220,8 @@ class CreatAccount(object):
                 account_fin = models.UserProfile.objects.filter(email=account_obj.instance.email).first()
                 account_fin.is_staff = self.is_staff
                 account_fin.roles.add(models.Role.objects.filter(name=self.role).first())
+                account_fin.groups.add(Group.objects.get(name='students'))
+
                 account_fin.save()
                 if not models.Customer.objects.filter(email=account_obj.instance.email).first():
                     models.Customer.objects.create(name=account_obj.instance.name,email=account_obj.instance.email,)

@@ -2,10 +2,13 @@
 # -*- coding:utf-8 -*-
 # _Auther_:Xiao Zhi
 # Date:2018/11/5
-from king_admin.permissions import permission_list
+from django.contrib.auth import logout
+from backconf.permissions import permission_list
 from django.shortcuts import render,redirect
 from MyselfObjects import settings
-from django.urls import resolve,reverse #reverse相对变绝对，resolve绝对变相对
+from django.urls import resolve  #reverse相对变绝对，resolve绝对变相对
+from backconf.permissions import permission_func
+
 
 
 def perm_check(*args,**kwargs):
@@ -14,7 +17,6 @@ def perm_check(*args,**kwargs):
     current_url_name = resolve_url_obj.url_name
     match_key = None
     match_results = [False, ]
-
     if request.user.is_authenticated is False:
          return 'no_login'
     for permission_key, permission_val in permission_list.perm_dic.items():
@@ -23,7 +25,7 @@ def perm_check(*args,**kwargs):
         per_method = permission_val[1]
         perm_args = permission_val[2]
         perm_kwargs = permission_val[3]
-        custom_perm_func = None if len(permission_val) == 4 else permission_val[-1]
+        custom_perm_func = None if len(permission_val) == 4 else getattr(permission_func,permission_val[-1])
 
         if per_url_name == current_url_name:
             if per_method == request.method:
@@ -56,11 +58,10 @@ def perm_check(*args,**kwargs):
                 # 自定义权限钩子
                 perm_func_matched = False
                 if custom_perm_func:
-                    if custom_perm_func(request, args, kwargs):
+                    if custom_perm_func(request, *args, **kwargs):
                         perm_func_matched = True
                     else:
                         perm_func_matched = False  # 使整条权限失效
-
                 else:  # 没有定义权限钩子，所以默认通过
                     perm_func_matched = True
 
@@ -70,19 +71,14 @@ def perm_check(*args,**kwargs):
                     break
 
     if all(match_results):
-
-        perm_obj = match_key
+        perm_obj =settings.PERMISSIONS_IN_APP + match_key
         if request.user.has_perm(perm_obj):
-            # print('111当前用户有此权限')
-            # print(dir(request.user.get_all_permissions))
-            # print(request.user.get_all_permissions)
             return True
         else:
-            # print('222当前用户没有该权限')
+            logout(request)
             return False
     else:
-        # print("未匹配到权限项，当前用户无权限")
-        pass
+        return False
 
 
 def check_permission(func):
@@ -92,6 +88,7 @@ def check_permission(func):
             return redirect(settings.LOGIN_URL)
         if not result:
             request = args[0]
-            return render(request,'king_admin/page_403.html')
+            errors='您无权访问该页面或页面丢失...'
+            return render(request, 'page_403.html',{'errors':errors})
         return func(*args, **kwargs)
     return inner

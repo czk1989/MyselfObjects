@@ -27,10 +27,11 @@
             </div>
             <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
             <br>
-            {% if app_name == 'students' %}
-            <a href="/students/registered/"><button class="btn btn-lg  btn-block" type="submit">注册</button></a>
-            {% endif %}
+
         </form>
+                {% if app_name == 'students' %}
+            <a href="/students/registered/"><button class="btn btn-lg  btn-block" >注册</button></a>
+            {% endif %}
         <br>
     </div>
 {% endblock %}
