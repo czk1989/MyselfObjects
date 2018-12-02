@@ -1,16 +1,13 @@
 
 from django.shortcuts import HttpResponseRedirect, render,redirect
-from django.contrib.auth import login,authenticate
-import datetime,os,random,string
-from MyselfObjects import settings
+
 from django.core.paginator import Paginator
 from django.contrib.auth.models import Group
 from king_admin import king_admin_base
 from king_admin import util
 from crm import models
 from king_admin import forms
-from backconf import verification,redis_cli
-import shutil,uuid,os
+from backconf import redis_cli
 
 
 REDIS_CONN=redis_cli.redis_conn()

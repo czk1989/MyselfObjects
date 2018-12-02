@@ -12,7 +12,7 @@
       {% block menu-add %}{% endblock %}
   </ol>
 {% block btn-add %}
-<a class="navbar-right" style="position: relative;top: -50px;right: 50px" href="/{{ app_name }}/{{ table_name }}/add/">新增</a>
+<a class="navbar-right" style="position: relative;top: -50px;right: 50px" href="{% url 'crm:customer_add' %}">新增</a>
  {% endblock %}
 {% endblock %}
 

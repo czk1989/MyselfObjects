@@ -7,7 +7,7 @@ from backconf.permissions import permission_list
 from django.shortcuts import render,redirect
 from MyselfObjects import settings
 from django.urls import resolve  #reverse相对变绝对，resolve绝对变相对
-from backconf.permissions import permission_func
+from backconf.permissions.permission_func import PermFunc
 
 
 
@@ -25,7 +25,7 @@ def perm_check(*args,**kwargs):
         per_method = permission_val[1]
         perm_args = permission_val[2]
         perm_kwargs = permission_val[3]
-        custom_perm_func = None if len(permission_val) == 4 else getattr(permission_func,permission_val[-1])
+        custom_perm_func = None if len(permission_val) == 4 else getattr(PermFunc(request),permission_val[-1])
 
         if per_url_name == current_url_name:
             if per_method == request.method:
@@ -58,7 +58,7 @@ def perm_check(*args,**kwargs):
                 # 自定义权限钩子
                 perm_func_matched = False
                 if custom_perm_func:
-                    if custom_perm_func(request, *args, **kwargs):
+                    if custom_perm_func():
                         perm_func_matched = True
                     else:
                         perm_func_matched = False  # 使整条权限失效
@@ -92,3 +92,4 @@ def check_permission(func):
             return render(request, 'page_403.html',{'errors':errors})
         return func(*args, **kwargs)
     return inner
+

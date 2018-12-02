@@ -68,7 +68,7 @@ perm_dic = {
 
     'can_get_my_class(teachers)': ['my_class', 'GET', [], {}],
 
-    'can_get_class_stu_list(teachers)': ['class_stu_list', 'GET', [], {}],
+    'can_get_class_stu_list(teachers)': ['class_stu_list', 'GET', [], {},'limit_class_list_'],
 
 
 }
