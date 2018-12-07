@@ -7,3 +7,5 @@ def redis_conn():
     r = redis.Redis(connection_pool=pool)
     return  r
 
+
+

@@ -8,13 +8,13 @@ from backconf import redis_cli
 REDIS_CONN=redis_cli.redis_conn()
 DIR=os.path.dirname(os.path.abspath(__file__))
 #字体的位置，不同版本的系统会有不同
-font_path=os.path.join(DIR,r'fonts\arial.ttf')
+font_path=os.path.join(DIR,'fonts/ariblk.ttf')
 
 #生成几位数的验证码
 number = 4
 
 #生成验证码图片的高度和宽度
-size = (100,30)
+size = (100,50)
 
 #背景颜色，默认为白色
 bgcolor = (255,255,255)
@@ -57,7 +57,7 @@ def gene_code(save_path,filename):
         gene_line(draw, width, height)
     image = image.transform((width + 20, height +10), Image.AFFINE, (1, -0.5, 0, -0.1, 1, 0), Image.BILINEAR)  # 创建扭曲
     image = image.filter(ImageFilter.EDGE_ENHANCE_MORE)  # 滤镜，边界加强
-    image.save(r'%s\%s.png' %(save_path,filename))  # 保存验证码图片
+    image.save('%s/%s.png' %(save_path,filename))  # 保存验证码图片
     return text
 
 
