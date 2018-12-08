@@ -30,6 +30,11 @@ class CustomerAdmin(BaseAdmin):
         return '''<a class="btn-link" href="/crm/enrollment/%s/">%s</a> ''' % (self.instance.id,link_name)
     enroll.display_name = "报名链接"
 
+class CustomerFollowUpaAdmin(BaseAdmin):
+    model = models.CustomerFollowUp
+    list_display = ['id','customer','consultant','intention','date']
+    list_search = ['intention']
+    list_filters=['intention','date']
 # 11报名表
 class EnrollmentAdmin(BaseAdmin):
     model = models.Enrollment
@@ -184,4 +189,5 @@ site.register(models.Course,CourseAdmin)
 site.register(models.Branch,BranchAdmin)
 site.register(models.ContractTemplate,ContractTemplateAdmin)
 site.register(models.Tag,TagAdmin)
+site.register(models.CustomerFollowUp,CustomerFollowUpaAdmin)
 

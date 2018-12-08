@@ -88,7 +88,7 @@ def check_permission(func):
             return redirect(settings.LOGIN_URL)
         if not result:
             request = args[0]
-            errors='您无权访问该页面或页面丢失...'
+            errors='您无权访问该页面...'
             return render(request, 'page_403.html',{'errors':errors})
         return func(*args, **kwargs)
     return inner

@@ -18,7 +18,7 @@ from django.urls import path,include,re_path
 from MyselfObjects import views
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/', views.myobjects, name='home'),
+    re_path('^$', views.myobjects, name='home'),
     path('accounts/logout/', views.sys_logout, ),
     path('accounts/login_choice/', views.login_choice, ),
     re_path('^accounts/(?P<app_name>\w+)/login/$', views.sys_login, ),
