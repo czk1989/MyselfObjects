@@ -56,3 +56,10 @@ def myobjects(request):
     return render(request, 'index.html')
 
 
+def page_not_found(request):
+    return render(request, 'page_404.html')
+
+
+def page_error(request):
+    return render(request, 'page_500.html')
+

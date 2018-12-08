@@ -16,6 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include,re_path
 from MyselfObjects import views
+
+
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     re_path('^$', views.myobjects, name='home'),
@@ -27,3 +31,7 @@ urlpatterns = [
     path('students/',include('students.urls')),
     path('teachers/',include('teachers.urls')),
 ]
+
+
+handler404 = views.page_not_found
+handler500 = views.page_error
