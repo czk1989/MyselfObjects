@@ -1,36 +1,55 @@
 {% extends 'students/stu_course_list.html' %}
 
-{% block menu-add %}
-  <li >报名流程1</li>
-{% endblock %}
 
 
-{% block btn-add %}
 
- {% endblock %}
+{% block content-right %}
+    <div class="row ">
+      <ul class="breadcrumb" >
+          <li ><a href="/students/" ><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a></li>
+          <li ><span id="table-name"><a href="/students/classlist/">班级表</a></span></li>
+          <li >报名1</li>
+      </ul>
+    </div>
 
-{% block menu-right %}
+
+
+
+
+<div class="row row col-xs-offset-1">
     {{ enroll_form.errors }}
-    <div>{{ msg }}</div>
-    <form action="" class="" role="form" method="post" style="padding-left: 200px">
+    </div>
+    <div class="row row col-xs-offset-1">{{ msg }}</div>
+    <form action="" role="form" method="post" >
     {% csrf_token %}
-        <div class="form-group" ><label for="">客户：{{ customer_name }}</label></div>
-        <div class="form-group" ><label for="">邮箱：{{ customer_email }}</label></div>
+        <div class="form-group row col-xs-offset-1" ><label for="">客户：{{ customer_name }}</label></div>
+        <div class="form-group row col-xs-offset-1" ><label for="">邮箱：{{ customer_email }}</label></div>
         <br>
-        <div class="form-group" ><label for="">报名校区：{{ branch }}</label></div>
-        <div class="form-group" ><label for="">报名课程：{{ course }}</label></div>
+        <div class="form-group row col-xs-offset-1" ><label for="">报名校区：{{ branch }}</label></div>
+        <div class="form-group row col-xs-offset-1" ><label for="">报名课程：{{ course }}</label></div>
             <br>
-        <div class="form-group" >
-            <label style="height: 300px;width: 600px;overflow: auto">{{ template }}</label>
+        <div class="form-group row col-xs-12 col-sm-6 col-xs-offset-1" >
+            <label >{{ template }}</label>
         </div>
-
+        <div class="form-group row col-xs-offset-1"></div>
+{#<div class="row col-xs-offset-1">#}
         {% for field in enroll_form %}
-            <div class="form-group" >
-                <label  for="">{{ field.label }}:</label>{{ field }}{{ field.errors }}
+{#            </div>#}
+            <div class="form-group row col-xs-offset-1" >
+                <label  for="">{{ field.label }}:</label>
+            </div>
+            <div class="form-group row col-xs-offset-1" >
+                {{ field }}{{ field.errors }}
             </div>
         {% endfor %}
+    <div class="row col-xs-offset-1">
         <button type="submit" class="btn btn-default  pull-left" disabled>下一步</button>
+        </div>
     </form>
+    <br>
+    <br>
+    <br>
+
 
 {% endblock %}
     

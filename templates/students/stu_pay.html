@@ -1,12 +1,21 @@
 {% extends 'students/stu_course_list.html' %}
 
-{% block menu-add %}
-  <li >报名流程2</li>
-  <li >付款</li>
-{% endblock %}
 
-{% block menu-right %}
-    <form action="" class="form-horizontal" role="form" method="post" style="width: 400px">
+{% block content-right %}
+    <div class="row ">
+      <ul class="breadcrumb" >
+          <li ><a href="/students/" ><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a></li>
+          <li ><span id="table-name"><a href="/students/classlist/">班级表</a></span></li>
+          <li >报名2</li>
+          <li >付款</li>
+      </ul>
+    </div>
+
+
+
+
+
+    <form action="" class="form-horizontal" role="form" method="post" >
         {% csrf_token %}
         <div>
             <label for="">{{ enroll_obj.customer }}</label>
@@ -27,6 +36,6 @@
                 {{ msg }}
             </div>
         <br>
-        <div  style="width: 600px;display: inline-block"><button type="submit" class="btn btn-success pull-left">付款</button></div>
+        <div  ><button type="submit" class="btn btn-success pull-left">付款</button></div>
     </form>
 {% endblock %}

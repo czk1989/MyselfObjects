@@ -38,9 +38,7 @@ def sys_login(request,app_name):
                 errors = '验证码错误'
         else:
             errors= '已经超过验证时间'
-        # else:
-        #     errors = '谢谢你能来到这里...'
-        #     return render(request, 'page_403.html', {'errors': errors})
+
     return render(request, 'login.html', {'errors': errors,
                                           "filename": file_name,
                                           'app_name':app_name,
@@ -49,7 +47,7 @@ def sys_login(request,app_name):
 
 def sys_logout(request):
     logout(request)
-    return redirect('/accounts/')
+    return redirect('/')
 
 def myobjects(request):
 
@@ -62,4 +60,3 @@ def page_not_found(request):
 
 def page_error(request):
     return render(request, 'page_500.html')
-

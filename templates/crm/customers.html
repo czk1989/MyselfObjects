@@ -1,70 +1,78 @@
 {% extends 'crm/sales_index.html' %}
 {% load crm_tags %}
-
-
- {% block menu-navigation %}
-      <!--导航条-->
-<!--===================================================-->
-
-  <ol class="breadcrumb" style="font-size: large">
-      <li ><span href="" >{{ app_name }}</span></li>
-      <li ><span id="table-name"><a href="/{{ app_name }}/{{ table_name }}/">{% render_app_name admin_class %}</a></span></li>
-      {% block menu-add %}{% endblock %}
-  </ol>
-
-{% endblock %}
-
-{% block menu-right %}
+{% block title-label %}客户信息表 | 网络培训CRM | {% endblock %}
+{% block content-right %}
+    <div class="row ">
+      <ul class="breadcrumb" >
+          <li ><a href="/{{ app_name }}/" ><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a></li>
+          <li ><span id="table-name"><a href="/{{ app_name }}/{{ table_name }}/">{% render_app_name admin_class %}</a></span></li>
+      </ul>
+    </div>
               <!--显示功能-->
     <!--===================================================-->
-      <div class="panel-body " style="overflow: auto" >
-            <form method="get" action="" style="margin-top: -15px;">
+      <div class="rowtable-bordered ">
+{#        <div class="row">#}
+            <form method="get" action="">
                 {% csrf_token %}
-
                           <!--查询检索栏-->
                     <!--===================================================-->
                 {% if  admin_class.list_filters %}
-                    <div class="row">
+                    <div class="row ">
                           {% for condition in admin_class.list_filters %}
-                               <span>&nbsp;&nbsp;&nbsp;&nbsp;{% get_key_val  condition admin_class  %}&nbsp;-&nbsp;</span>
+                              <div class="col-lg-3 col-md-6 col-sm-6 ">
+                               <span >{% get_key_val  condition admin_class  %}-</span>
                                {% render_filter_eme  condition admin_class filter_condition %}
+                             </div>
                           {% endfor %}
-                          &nbsp;&nbsp;<button type="submit" class="btn btn-primary btn-sm">检索</button>
-
+                    <div class="col-lg-3 col-md-3 col-sm-3">
+                          <button type="submit" class="btn btn-primary btn-sm ">检索</button></div>
                     </div>
                 {% endif %}
+                <br class="visible-xs">
                           <!--关键字搜索栏-->
                     <!--===================================================-->
                 <div class="row" >
-                      <div class="col-lg-2" style="display: inline-block;">
+                      <div class="col-lg-3 col-md-3 col-sm-3" >
                           <input name="_q" type="text" class='form-control input-sm' placeholder="{% for i in admin_class.list_search %}{% search_name i admin_class %}&nbsp;{% endfor %}" value="{{ search_key }}">
                       </div>
-                      <button type="submit" class="btn btn-primary btn-sm" style="display: inline-block; width:auto"  >查找关键字</button>
-                  </div>
+                      <div class="col-lg-3 col-md-3 col-sm-3"><button type="submit" class="btn btn-primary btn-sm" >查找关键字</button></div>
+
+                </div>
             </form>
+{#        </div>#}
             <br>
+
                       <!--自定义action功能选项-->
                 <!--===================================================-->
-            <form class="row col-lg-2" action="" method="post" onsubmit="return ActionSubmit(this)" id="Addfieldsid">
+            <form action="" method="post" onsubmit="return ActionSubmit(this)" id="Addfieldsid">
                 {% csrf_token %}
-                <select class='btn-sm form-group ' name="action" id="select-value" style="display: inline-block; width: 200px">
-                    <option value="">-------------------------</option>
+                <select class='btn-sm form-group ' name="action" id="select-value">
+                    <option value="">------------------</option>
                     {% for func_list in admin_class.list_action %}
                         <option value="{{ func_list}}">{% func_name func_list admin_class %}</option>
                     {% endfor %}
                 </select>
-                &nbsp;&nbsp;<button type="submit" class=" btn btn-sm"  >Go</button>
+                <button class=" btn btn-sm"  type="submit"  >Go</button>
             </form>
 
                         <!--显示内容-->
                 <!--===================================================-->
-            <table class="table table-hover">
+
+
+
+
+
+        <div class="panel">
+
+                <div class="panel-body">
+            <div class="table-responsive">
+            <table class="table table-responsive">
 
                         <!--显示标题并实现排序功能-->
                 <!--===================================================-->
                 <thead>
                       <tr class="breadcrumb">
-                      <th style="max-width: 20px">
+                      <th >
                           <input  type="checkbox" id="all-choiced">
                       </th>
                       {% for column in admin_class.list_display %}
@@ -91,22 +99,38 @@
                       {% endfor %}
                 </tbody>
             </table>
+                     </div>
+        </div>
+        </div>
 
           <!--统计-->
       <!--===================================================-->
-            <p>总计{{ query_sets.paginator.count }}条记录</p>
+      <p>总计<span style="color: red">{{ query_sets.paginator.count }}</span>条记录</p>
 
-          <!--分页栏-->
-      <!--===================================================-->
-          <div class="pagination">
-              <nav aria-label="...">
-                  <ul class="pagination">
-                      {% page_index query_sets filter_condition previous_orderby search_key %}
-                  </ul>
-              </nav>
-          </div>
+{#          <!--分页栏-->#}
+{#      <!--===================================================-->#}
+{#          <div class="pagination">#}
+{#              <nav aria-label="...">#}
+{#                  <ul class="pagination">#}
+{#                      {% page_index query_sets filter_condition previous_orderby search_key %}#}
+{#                  </ul>#}
+{#              </nav>#}
+{#          </div>#}
       </div>
 
+
+              <!--分页栏-->
+    <div class="row">
+        <div class="col-sm-3"></div>
+            <div class="col-sm-6 col-xs-12">
+                  <nav aria-label="...">
+                      <ul class="pagination">
+                          {% page_index query_sets filter_condition previous_orderby search_key %}
+                      </ul>
+                  </nav>
+              </div>
+        <div class="col-sm-3"></div>
+    </div>
 
 {% endblock %}
 

@@ -1,28 +1,55 @@
 {% extends 'students/stu_index.html' %}
 {% load students_tags %}
+{% block title-label %}我的课程 | 学员 | 网络培训CRM | {% endblock %}
 
- {% block menu-navigation %}
-      <!--导航条-->
-<!--===================================================-->
 
-  <ol class="breadcrumb" style="font-size: large">
-      <li ><span href="" >students</span></li>
-      <li ><span id="table-name"><a href="/students/my_course/">我的课程</a></span></li>
-      {% block menu-add %}{% endblock %}
-  </ol>
+
+{% block content-right %}
+    <div class="row ">
+      <ul class="breadcrumb" >
+          <li ><a href="/students/" ><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a></li>
+          <li ><span id="table-name"><a href="/students/my_course/">我的课程</a></span></li>
+      </ul>
+    </div>
+
+    <div class="row col-xs-offset-1">
+    {% stu_class stu_classlist %}
+        <label class="form-group" style="color: #5bc0de">页面优化待完善...</label>
+    </div>
+
 
 {% endblock %}
 
 
-            {% block menu-right %}
 
-                {% stu_class stu_classlist %}
 
-                    <div class="row">
-                        <label class="form-group" style="color: #5bc0de">页面优化待完善...</label>
-                    </div>
 
-            {% endblock %}
+
+
+{##}
+{##}
+{# {% block menu-navigation %}#}
+{#      <!--导航条-->#}
+{#<!--===================================================-->#}
+{##}
+{#  <ol class="breadcrumb" style="font-size: large">#}
+{#      <li ><span href="" >students</span></li>#}
+{#      <li ><span id="table-name"><a href="/students/my_course/">我的课程</a></span></li>#}
+{#      {% block menu-add %}{% endblock %}#}
+{#  </ol>#}
+{##}
+{#{% endblock %}#}
+{##}
+{##}
+{#            {% block menu-right %}#}
+{##}
+{#                {% stu_class stu_classlist %}#}
+{##}
+{#                    <div class="row">#}
+{#                        <label class="form-group" style="color: #5bc0de">页面优化待完善...</label>#}
+{#                    </div>#}
+{##}
+{#            {% endblock %}#}
 
 
 {#{% block script-list %}#}

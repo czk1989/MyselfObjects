@@ -1,25 +1,70 @@
-{% extends 'index_base.html' %}
+{% extends 'crm_index.html' %}
+{% block title-label %}网络培训CRM | {% endblock %}
 
-{% block tag %}
-{% load crm_tags %}
-{% endblock %}
-
-{% block logout %}
-      <li><a href="{% url 'home' %} ">注销</a></li>
-{% endblock %}
-
-{% block menu_left %}
-
-          <ul class="nav nav-sidebar">
-            <li class="active"><a href="/crm/">销售人员CRM首页<span class="sr-only">(可以隐藏)</span></a></li>
-          </ul>
-          {% for app_name,table_obj in menus.items %}
-          <ul class="nav nav-sidebar">
+  {% block menu-left %}
+        {% for app_name,table_obj in menus.items %}
+            <h2 class="btn-info text-center">销售首页</h2>
+            <ul class="nav nav-pills nav-stacked">
              {% for table in table_obj %}
-                 <li id="menu"><a href="/{{ app_name.url_name }}{{table.url_name}}">{{ table.name }}</a></li>
+                 <li id="menu"><a class="label label-default " href="/{{ app_name.url_name }}{{table.url_name}}">{{ table.name }}</a></li>
              {% endfor %}
-                 <li id="menu"><a href="/crm/my_customers/">我的客户</a></li>
+                 <li id="menu"><a class="label label-default " href="/crm/my_customers/">我的客户</a></li>
           </ul>
           {% endfor %}
-
 {% endblock %}
+
+        {% block content-right %}
+            <div class="row">
+
+	<div class="jumbotron">
+				<h2>销售界面要实现以下功能：</h2>
+				<ul>
+                    <li>能够查看系统所有的潜在客户</li>
+                    <li>能够查看客户的跟踪情况</li>
+                    <li>能够单独查看自己跟进的用户</li>
+                    <li>能够修改自己客户的信息，不能修改的销售客户人员的信息</li>
+                    <li>能够和自己的客户进行沟通</li>
+                    <li>...</li>
+                    <li>以上功能只有部分开发了，还有一部分没有实现</li>
+                </ul>
+    </div>
+            </div>
+            {% endblock %}
+
+
+{% block appmenu %}
+    <div class=" navbar-fixed-bottom visible-xs visible-sm" >
+
+        {% for app_name,table_obj in menus.items %}
+            <div class="col-xs-3 dropup">
+                <button class="btn btn-sm btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                菜单
+                <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    {% for table in table_obj %}
+                        <li class="" id="menu"><a  href="/{{ app_name.url_name }}{{table.url_name}}">{{ table.name }}</a></li>
+                    {% endfor %}
+                    <li id="menu"><a href="/crm/my_customers/">我的客户</a>
+                </ul>
+
+            </div>
+         {% endfor %}
+    </div>
+{% endblock %}
+
+{#{% block menu_left %}#}
+{##}
+{#          <ul class="nav nav-sidebar">#}
+{#            <li class="active"><a href="/crm/">销售人员CRM首页<span class="sr-only">(可以隐藏)</span></a></li>#}
+{#          </ul>#}
+{#          {% for app_name,table_obj in menus.items %}#}
+{#          <ul class="nav nav-sidebar">#}
+{#             {% for table in table_obj %}#}
+{#                 <li id="menu"><a href="/{{ app_name.url_name }}{{table.url_name}}">{{ table.name }}</a></li>#}
+{#             {% endfor %}#}
+{#                 <li id="menu"><a href="/crm/my_customers/">我的客户</a></li>#}
+{#          </ul>#}
+{#          {% endfor %}#}
+{##}
+{#{% endblock %}#}

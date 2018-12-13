@@ -1,15 +1,45 @@
-{% extends 'index_base.html' %}
 
+{% extends 'crm_index.html' %}
+{% block title-label %}讲师 | 网络培训CRM | {% endblock %}
 
-{% block logout %}
-      <li><a href="{% url 'home' %} ">注销</a></li>
+  {% block menu-left %}
+      <h3>讲师首页</h3>
+          <ul class="nav nav-pills nav-stacked">
+                 <li id="menu"><a href="/teachers/my_class/">我的课程</a></li>
+                 <li>（部分功能待完善）</li>
+
+          </ul>
 {% endblock %}
 
-{% block menu_left %}
-          <ul class="nav nav-sidebar">
-            <li class="active"><a href="/teachers/">讲师首页<span class="sr-only">(可以隐藏)</span></a></li>
-          </ul>
-          <ul class="nav nav-sidebar">
-                 <li id="menu" class="active"><a href="/teachers/my_class/">我的课程</a></li>
-          </ul>
+{% block content-right %}
+    <div class="row">
+           			<div class="jumbotron">
+				<h2>讲师界面要实现以下功能：</h2>
+				<ul>
+                    <li>有自己的课程界面</li>
+                    <li>能够查看上课记录</li>
+                    <li>能够查看自己班级的学员成绩</li>
+                    <li>能够批量生成上课记录</li>
+                    <li>能对班上学员学习打分</li>
+                    <li>...</li>
+                    <li>以上界面有待开发</li>
+                </ul>
+
+			</div>
+    </div>
+{% endblock %}
+
+{% block appmenu %}
+    <div class=" navbar-fixed-bottom visible-xs visible-sm" >
+            <div class="col-xs-3 dropup">
+                <button class="btn btn-sm btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                菜单
+                <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <li class="active" id="menu"><a href="/teachers/my_class/">我的课程</a>
+                    <li>（部分功能待完善）</li>
+                </ul>
+            </div>
+    </div>
 {% endblock %}

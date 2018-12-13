@@ -1,18 +1,22 @@
 {% extends 'base.html' %}
+{% block title-label %}网络培训CRM | {% endblock %}
 
-{% block body %}
 
-    <div class="container" style="max-width: 350px">
-        <form class="form-signin" method="post">
+      {% block content %}
+
+	<div class="row clearfix">
+        <div class="col-md-4 "></div>
+        <div class="col-md-4 ">
+ <form class="form" method="post">
               {% csrf_token %}
             <h2 class="form-signin-heading">{{ role }}登录:</h2>
-            <input type="email" name="email" class="form-control" placeholder="Email address" >
+            <input type="email" name="email" class="form-control" placeholder="请输入账号/注册邮箱" >
             <br>
 {#            <label for="password" class="sr-only">Password</label>#}
-            <input type="password" name="password" class="form-control" placeholder="Password" >
+            <input type="password" name="password" class="form-control" placeholder="请输入密码" >
             <a href="."><img  src="/static/verif_img/{{ filename }}.png">刷新</a>
             <br>
-            <input  type="text" name="verify_code" class="form-control" placeholder="验证码">
+            <input  type="text" name="verify_code" class="form-control" placeholder="请输入验证码">
             <br>
             <input  type="hidden" name="verify_code_key" value="{{ filename }}" >
             {% if errors  %}
@@ -22,7 +26,7 @@
             <div class="item">
                 <p class="remember">
                     <input type="checkbox" id="remember" name="remember" tabindex="4">
-                    <label for="remember" class="remember">下次自动登录</label> | <a href="">忘记密码了</a>
+                    <label for="remember" class="remember">下次自动登录</label> | <a href="#">忘记密码了</a>
                 </p>
             </div>
             <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
@@ -33,6 +37,21 @@
             <a href="/students/registered/"><button class="btn btn-lg  btn-block" >注册</button></a>
             {% endif %}
             <a class="btn-lg btn-block" href="/">返回主界面</a>
+        </div>
+        <div class="col-md-4 "></div>
+    </div>
+{% endblock %}
+
+
+
+
+
+
+
+{% block body %}
+
+    <div class="container" style="max-width: 350px">
+
         <br>
     </div>
 {% endblock %}

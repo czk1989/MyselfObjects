@@ -1,6 +1,14 @@
-{% extends 'crm/my_customers_change.html' %}
-{% block menu-add %}
-    <li >新增</li>
-{% endblock %}
-{% block btn-add %}
-{% endblock %}
+{% extends 'crm/info_find.html' %}
+
+{% load crm_tags %}
+{% block title-label %}我的客户 | 网络培训CRM | {% endblock %}
+    {% block menuadd %}
+          <li ><span id="table-name"><a href="/{{ app_name }}/my_customers/">我的客户</a></span></li>
+          <li >新增</li>
+
+              {% endblock %}
+                {% block button %}
+                 <button type="submit" class="btn btn-success" ><span class="glyphicon glyphicon-ok" aria-hidden="true">提交</span></button>
+                <a class="btn btn-default " href="/{{ app_name }}/my_customers/">返回</a>
+
+                {% endblock %}

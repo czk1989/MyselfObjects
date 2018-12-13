@@ -1,28 +1,27 @@
 {% extends 'students/stu_index.html' %}
 {% load students_tags %}
+{% block title-label %}班级表 | 学员 | 网络培训CRM | {% endblock %}
 
 
- {% block menu-navigation %}
-      <!--导航条-->
-<!--===================================================-->
 
-  <ol class="breadcrumb" style="font-size: large">
-      <li ><span href="" >students</span></li>
-      <li ><span id="table-name"><a href="/students/classlist/">班级表</a></span></li>
-      {% block menu-add %}{% endblock %}
-  </ol>
+{% block content-right %}
+    <div class="row ">
+      <ul class="breadcrumb" >
+          <li ><a href="/students/" ><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a></li>
+          <li ><span id="table-name"><a href="/students/classlist/">班级表</a></span></li>
 
-{% endblock %}
+      </ul>
+    </div>
 
-{% block menu-right %}
+    <div class="panel">
               <!--显示功能-->
     <!--===================================================-->
-      <div class="panel-body " style="overflow: auto" >
+      <div class="panel-body " >
 
-
+<div class="table-responsive">
                         <!--显示内容-->
                 <!--===================================================-->
-            <table class="table table-hover">
+            <table class="table table-responsive">
 
                         <!--显示标题并实现排序功能-->
                 <!--===================================================-->
@@ -45,6 +44,8 @@
 
                 </tbody>
             </table>
+      </div>
+      </div>
       </div>
 
 

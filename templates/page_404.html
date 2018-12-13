@@ -5,8 +5,8 @@
      <link href="/static/css/cover.css" rel="stylesheet">
 {% endblock %}
 
-{% block body %}
-
+{% block content %}
+<div class="row clearfix">
     <div class="site-wrapper">
 
       <div class="site-wrapper-inner">
@@ -14,13 +14,10 @@
         <div class="cover-container">
 
           <div class="inner cover">
-            <img style="max-width: 150px;max-height: 150px" src="/static/img/403.jpg" alt="哈哈">
+            <img style="max-width: 140px;max-height: 140px" src="/static/img/403.jpg" alt="哈哈">
             <h1 class="cover-heading">页面错误：404</h1>
             <h3 class="cover-heading">页面不存在.</h3>
             <p class="lead">Please visit other interfaces or follow the prompts below</p>
-            <p class="lead">
-              <a href="/accounts/login_choice/" class="btn btn-lg btn-default">返回登录选择界面</a>
-            </p>
           </div>
 
         </div>
@@ -28,5 +25,6 @@
       </div>
 
     </div>
+</div>
 
 {% endblock %}

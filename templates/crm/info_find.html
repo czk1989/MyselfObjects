@@ -1,0 +1,88 @@
+
+{% extends 'crm/customers.html' %}
+{% load crm_tags %}
+
+{% block content-right %}
+        <div class="row ">
+      <ul class="breadcrumb" >
+          <li ><span ><a href="/{{ app_name }}/" ><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a></span></li>
+            {% block menuadd %}
+        {#          <li ><span id="table-name"><a href="/{{ app_name }}/{{ table_name }}/">{% render_app_name admin_class %}</a></span></li>#}
+        {#          <li >查看</li>#}
+
+            {% endblock %}
+      </ul>
+    </div>
+<div class="row col-xs-10 col-xs-offset-1 col-sm-12">
+    <form class="form-horizontal " method="get" onsubmit="return SelectAllChosenData()">
+    {% csrf_token %}
+    {{ form_obj.errors }}
+          {% for foo in form_obj %}
+                <div class="form-group" >
+                    <label for="inputEmail3" class="col-sm-2 col-sm-1 control-label">{{ foo.label }}</label>
+                    {% if foo.name in admin_class.filter_horizontal %}
+{#   列出对应数据列表的所有可选字段(除去默认应选中的字段)#}
+
+                        {% get_m2m_obj_list admin_class foo form_obj as m2m_obj_list %}
+                        <div class="col-xs-5">
+                            <select multiple name="{{ foo.name }}" id="id_{{ foo.name }}_from" >
+                                {% for obj in m2m_obj_list %}
+                                    <option value="{{ obj.id }}" onclick="MoveElementTo(this,'id_{{ foo.name }}_to','id_{{ foo.name }}_from')">{{ obj.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+
+                        <div class="col-xs-2 col-sm-1">
+                            <button class="glyphicon glyphicon-arrow-right btn-link" aria-hidden="true" ></button>
+                            <button class="glyphicon glyphicon-arrow-left btn-link" aria-hidden="true"></button>
+                        </div>
+
+                        <div class="col-xs-5">
+{#   列出数据库对应表已经拥有的字段#}
+                        {% get_choiced_field form_obj foo as choicesfield %}
+                            <select tag="chosen_list" multiple name="{{ foo.name }}" id="id_{{ foo.name }}_to" >
+                                {% for choiced in choicesfield %}
+                                    <option value="{{ choiced.id }}" onclick="MoveElementTo(this,'id_{{ foo.name }}_to','id_{{ foo.name }}_from')">{{ choiced.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    {% else %}
+                        <div class="col-sm-9">{{ foo }}{{ foo.help_text }}</div>
+                    {% endif %}
+                </div>
+          {% endfor %}
+        <br>
+            <div class="row" >
+                {#实现修改后的保存数据功能并返回到数据列表清单页面#}
+                {% block button %}
+{#                <button type="submit" class="btn btn-success" ><span class="glyphicon glyphicon-ok" aria-hidden="true">提交</span></button>#}
+{#                <a class="btn btn-default " href="/{{ app_name }}/{{ table_name }}/">返回</a>#}
+                {#实现修改页面的删除功能#}
+{#                {% delete_field_obj form_obj delete_url_path %}#}
+                {% endblock %}
+            </div>
+        <br>
+        <br>
+    </form>
+    </div>
+{% endblock %}
+
+{#实现不能修改字段也能提交到后台，保证数据库表的参照完整性#}
+    {% block script-obj %}
+    <script>
+        function MoveElementTo(ele,target_id,new_target_id) {
+            var opt_ele="<option value='"+$(ele).val()+"'ondblclick=MoveElementTo(this,'"+new_target_id+"','"+target_id+"')>"+$(ele).text()+"</option>";
+            $('#'+target_id).append(opt_ele);
+            $(ele).remove();
+        }
+
+        function SelectAllChosenData() {
+            $("select[tag='chosen_list'] option").each(function () {
+                $(this).prop('selected',true);
+            });
+            $('form :disabled').removeAttr('disabled');
+            return true;
+        }
+    </script>
+   {% endblock %}

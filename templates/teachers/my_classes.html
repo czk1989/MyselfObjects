@@ -1,14 +1,17 @@
 {% extends 'teachers/teachers_index.html' %}
-{% load crm_tags %}
+{% block title-label %}我的课程 | 讲师 | 网络培训CRM | {% endblock %}
+{% load teachers_tags %}
 
-{% block menu-navigation %}
-    <li >我的班级</li>
-{% endblock %}
+{% block content-right %}
+    <div class="row ">
+      <ul class="breadcrumb" >
+          <li ><span ><a href="/teachers/" ><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a></span></li>
+          <li ><span id="table-name"><a href="/teachers/my_class/">我的课程</a></span></li>
+{#          <a class="navbar-right" href="{% url 'crm:customer_add' %}">新增</a>#}
+      </ul>
+    </div>
 
-
-{% block menu-right %}
-
-    <div class="panel">
+    <div class="row panel">
 
         <!-- Striped Table -->
         <!--===================================================-->

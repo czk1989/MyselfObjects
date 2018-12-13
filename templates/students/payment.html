@@ -1,19 +1,16 @@
 {% extends 'students/stu_index.html' %}
 {% load students_tags %}
+{% block title-label %}缴费记录 | 学员 | 网络培训CRM | {% endblock %}
 
- {% block menu-navigation %}
-      <!--导航条-->
-<!--===================================================-->
 
-  <ol class="breadcrumb" style="font-size: large">
-      <li ><span href="" >students</span></li>
-      <li ><span id="table-name"><a href="/students/my_course/">缴费记录表</a></span></li>
-      {% block menu-add %}{% endblock %}
-  </ol>
+{% block content-right %}
+    <div class="row ">
+      <ul class="breadcrumb" >
+          <li ><a href="/students/" ><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a></li>
+          <li ><span id="table-name"><a href="/students/payment/">缴费记录表</a></span></li>
 
-{% endblock %}
-
-{% block menu-right %}
+      </ul>
+    </div>
 
         {% if condition %}
                 {% for record in payment_list %}
@@ -24,7 +21,7 @@
         {% else %}
             <div>么有缴费记录</div>
         {% endif %}
-        <div class="row">
+        <div class="row col-xs-offset-1">
             <label class="form-group" style="color: #5bc0de">页面优化待完善...</label>
         </div>
 {% endblock %}

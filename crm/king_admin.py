@@ -68,7 +68,7 @@ class CourseRecordAdmin(BaseAdmin):
     model = models.CourseRecord
     list_display = ['id','from_class','day_num','date','teacher','has_homework']
     # fk_fields = ['from_class','teacher']
-    list_filters = ['from_class','teacher','has_homework','date']
+    list_filters = ['from_class','teacher','date']
     list_search = ['day_num']
     # def study_records(self):
     #     ele = '''<a class="btn-link" href='/crm/crm_studyrecord/?&course_record=%s' >学员成绩</a>''' \

@@ -1,12 +1,14 @@
 {% extends 'base.html' %}
+{% block title-label %}网络培训CRM | {% endblock %}
+      {% block content %}
 
-{% block body %}
-
-    <div class="container" style="max-width: 350px">
+	<div class="row clearfix">
+    <div class="col-md-4 column"></div>
+		<div class="col-md-4 ">
         <br>
-    <h2>登录窗口选择：</h2>
+    <h2>角色选择：</h2>
 
-        <a  href="/accounts/king_admin/login/"><button class="btn btn-lg  btn-block">管理员登录入口&gt;&gt;</button></a>
+        <a href="/accounts/king_admin/login/"><button class="btn btn-lg  btn-block">管理员登录入口&gt;&gt;</button></a>
         <br>
         <a href="/accounts/crm/login/"><button class="btn btn-lg  btn-block">销售登录入口&gt;&gt;</button></a>
         <br>
@@ -16,5 +18,7 @@
         <br>
         <a class="btn-lg btn-block" href="/">返回主界面</a>
 
+    </div>
+    <div class="col-md-4 column"></div>
     </div>
 {% endblock %}

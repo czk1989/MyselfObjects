@@ -1,15 +1,19 @@
 {% extends 'teachers/teachers_index.html' %}
 {% load teachers_tags %}
+{% block title-label %}班级学员列表 | 讲师 | 网络培训CRM | {% endblock %}
 
 
-{% block menu-navigation %}
-    <li >班级学员列表</li>
-{% endblock %}
 
+    {% block content-right %}
+    <div class="row ">
+      <ul class="breadcrumb" >
+          <li ><span ><a href="/teachers/" ><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a></span></li>
+          <li ><span id="table-name"><a href="/teachers/my_class/">我的课程</a></span></li>
+          <li >班级学员列表</li>
+      </ul>
+    </div>
 
-{% block menu-right %}
-
-    <div class="panel">
+    <div class="row panel">
         <div class="panel-heading">
             <h3 class="panel-title">{{ class_ojb }}</h3>
         </div>

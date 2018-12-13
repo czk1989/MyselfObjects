@@ -1,30 +1,81 @@
-{% extends 'index_base.html' %}
+{% extends 'crm_index.html' %}
+{% block title-label %}学员 | 网络培训CRM | {% endblock %}
 
-
-{% block tag %}
-    {% load king_admin_tags %}
+  {% block menu-left %}
+        {% for app_name,table_obj in menus.items %}
+            <h2 class="btn-info text-center">学生首页</h2>
+            <ul class="nav nav-pills nav-stacked">
+             {% for table in table_obj %}
+                 <li id="menu"><a class="label label-default " href="/{{ app_name.url_name }}{{table.url_name}}">{{ table.name }}</a></li>
+             {% endfor %}
+                 <li id="menu"><a class="label label-default " href="/students/my_course/">我的课程</a></li>
+          </ul>
+          {% endfor %}
 {% endblock %}
 
-{% block logout %}
-    <li><a href="{% url 'home' %} ">注销</a></li>
+{% block content-right %}
+    <div class="row">
+	<div class="jumbotron">
+				<h2>学生界面要实现以下功能：</h2>
+				<ul>
+                    <li>能够查看网站所有的课程</li>
+                    <li>能够报名</li>
+                    <li>能够有自己的班级</li>
+                    <li>能够查看自己的成绩</li>
+                    <li>能够提交作业</li>
+                    <li>...</li>
+                    <li>以上功能只有部分开发了，还有一部分没有实现</li>
+                </ul>
+    </div>
+    </div>
 {% endblock %}
 
 
-{% block menu_left %}
-      <ul class="nav nav-sidebar">
-        <li class="active"><a href="/students/">学员首页<span class="sr-only">(可以隐藏)</span></a></li>
-      </ul>
-      {% for app_name,table_obj in menus.items %}
-      <ul class="nav nav-sidebar">
-         {% for table in table_obj %}
-             <li id="menu"><a href="/{{ app_name.url_name }}{{table.url_name}}">{{ table.name }}</a></li>
+
+
+
+
+
+{% block appmenu %}
+    <div class=" navbar-fixed-bottom visible-xs visible-sm" >
+
+        {% for app_name,table_obj in menus.items %}
+            <div class="col-xs-3 dropup">
+                <button class="btn btn-sm btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                菜单
+                <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    {% for table in table_obj %}
+                        <li class="" id="menu"><a  href="/{{ app_name.url_name }}{{table.url_name}}">{{ table.name }}</a></li>
+                    {% endfor %}
+                    <li id="menu"><a  href="/students/my_course/">我的课程</a></li>
+                </ul>
+
+            </div>
          {% endfor %}
-             <li id="menu"><a href="/students/my_course/">我的课程</a></li>
-      </ul>
-
-      {% endfor %}
-
+    </div>
 {% endblock %}
+
+
+
+
+{##}
+{#{% block menu_left %}#}
+{#      <ul class="nav nav-sidebar">#}
+{#        <li class="active"><a href="/students/">学员首页<span class="sr-only">(可以隐藏)</span></a></li>#}
+{#      </ul>#}
+{#      {% for app_name,table_obj in menus.items %}#}
+{#      <ul class="nav nav-sidebar">#}
+{#         {% for table in table_obj %}#}
+{#             <li id="menu"><a href="/{{ app_name.url_name }}{{table.url_name}}">{{ table.name }}</a></li>#}
+{#         {% endfor %}#}
+{#             <li id="menu"><a href="/students/my_course/">我的课程</a></li>#}
+{#      </ul>#}
+{##}
+{#      {% endfor %}#}
+
+{#{% endblock %}#}
 
 {% block script-list %}
     <script>

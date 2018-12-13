@@ -1,6 +1,7 @@
-{% extends 'king_admin/king_admin_table_objs_change.html' %}
-{% block menu-add %}
-    <li >新增</li>
-{% endblock %}
-{% block btn-add %}
-{% endblock %}
+{% extends 'king_admin/king_admin_info.html' %}
+{% load king_admin_tags %}
+
+    {% block menu-add %}
+          <li ><span id="table-name"><a href="/king_admin/{{ app_name }}/{{ table_name }}/">{% render_app_name admin_class %}</a></span></li>
+        <li >新增</li>
+          {% endblock %}

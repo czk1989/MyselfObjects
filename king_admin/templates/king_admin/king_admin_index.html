@@ -1,51 +1,54 @@
-{% extends 'king_admin/king_admin_index_base.html' %}
+{% extends 'crm_index.html' %}
+{% block title-label %}admin | 网络培训CRM | {% endblock %}
 {% load king_admin_tags %}
 
-      {% block title-login %}
-              <ul class="nav navbar-nav navbar-right">
-                  <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{request.user.name }}<span class="caret"></span></a>
-                      <ul class="dropdown-menu">
-                          <li><a href="#">配置</a></li>
-                          <li><a href="{% url 'home' %} ">注销</a></li>
-                      </ul>
-                  </li>
-              </ul>
-      {% endblock %}
-
-      {% block menu-left %}
-
-          {% if menus %}
+{% block menu-left %}
+      {% if menus %}
              {% for first_menu,second_menus in menus.items %}
-                 <dl >
-                      <dt id="menu" class="btn btn-link" name="{{ first_menu }}" >
-                          <h3 class="btn-link" style="color: black">{{ first_menu }}</h3>
-                      </dt>
+                    <h2 class="btn-info text-center">{{ first_menu }}</h2>
+                    <ul class="nav nav-pills nav-stacked">
                       {% for second_menu_name,second_menu_url in second_menus.items %}
-                          <dd class=" nav nav-pills nav-stacked " hidden >
-                              <a class="btn-sm" href="/king_admin/{{ first_menu | lower }}/{{second_menu_url}}/" >{{ second_menu_name }}</a>
-                          </dd>
+                          <li id="menu">
+                              <a class="label label-default " href="/king_admin/{{ first_menu | lower }}/{{second_menu_url}}/" >{{ second_menu_name }}</a>
+                          </li>
                       {% endfor %}
-                 </dl>
+                    </ul>
              {% endfor %}
           {% else %}
               <div>(空)</div>
-          {% endif %}
-      {% endblock %}
+      {% endif %}
 
+{% endblock %}
 
-      {% block menu-right %}
-            <img src="/static/kingadmin/img/indexBanner.png" width="100%" height="100%" alt="">
-      {% endblock %}
+{% block content-right %}
+    <div class="row">
 
+           			<div class="jumbotron">
+				<h2>说明：</h2>
+				<p>CRM系统重写了django框架下admin的部分功能，包括用户登录，权限认证，查询等等，本系统使用的是mysql数据库，
+                    登录界面的验证码功能用到了redis缓存数据库，通过CRM系统的开发，尽量巩固、实践、并扩展自己学的python知识。</p>
 
-    {% block script-list %}
+    </div>
+    </div>
+{% endblock %}
 
-            <script>
-            $(function () {
-                $.Menu();
-            });
-            </script>
-        {% block script-index %}
-        {% endblock %}
-    {% endblock %}
+{% block appmenu %}
+    <div class=" navbar-fixed-bottom visible-xs visible-sm" >
+         {% for first_menu,second_menus in menus.items %}
+            <div class="col-xs-3 dropup">
+                <button class="btn btn-sm btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{ first_menu }}
+                <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    {% for second_menu_name,second_menu_url in second_menus.items %}
+                        <li id="menu">
+                         <a class="btn-default col-xs-12 " href="/king_admin/{{ first_menu | lower }}/{{second_menu_url}}/" >{{ second_menu_name }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+
+            </div>
+         {% endfor %}
+    </div>
+{% endblock %}

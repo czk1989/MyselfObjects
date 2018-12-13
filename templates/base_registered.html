@@ -1,27 +1,42 @@
 
 {% extends 'base.html' %}
-{% block role_menu %}
 
-{% endblock %}
 
-{% block body %}
+{% block content %}
 
+        <div class="row clearfix  ">
+{#        <div class="row col-xs-3"></div>#}
+        <div class="row col-xs-10 col-xs-offset-1">
     <form class="form-horizontal " method="post" action=".">
-            <div class="row" style="margin-left: 70px;width: 300px" >
+{#            <div class="row"  >#}
                 <h3 ><span style="color: red">*</span>注册</h3>
 
-            </div>
+{#            </div>#}
     {% csrf_token %}
     {{ errors }}
           {% for foo in account_obj %}
-                <div class="form-group" style="margin: 10px ">
-                    <label for="inputEmail3" class="col-sm-2 control-label">{{ foo.label }}</label>
-                        <div class="col-sm-6">{{ foo }}</div>
+                <div class="form-group" >
+                    <label for="inputEmail3" class="">{{ foo.label }}</label>
+                        <div class="">{{ foo }}</div>
                 </div>
           {% endfor %}
         <br>
-            <div class="row" style="margin-left: 70px;width: 300px" >
+            <div class="row" >
                 <button type="submit" class="btn btn-success" ><span class="glyphicon glyphicon-ok" aria-hidden="true">提交</span></button>
             </div>
     </form>
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
 {% endblock %}
