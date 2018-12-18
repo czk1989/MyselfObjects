@@ -21,8 +21,7 @@
 - 实现爬取某一网站的视频文件
 
 
-## 基本使用
-### requirements
+### 开发环境依赖
 - python3.7+
 - django 2.1+
 - scrapy
