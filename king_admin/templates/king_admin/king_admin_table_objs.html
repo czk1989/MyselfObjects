@@ -5,114 +5,99 @@
 {% block content-right %}
     <div class="row">
          <ul class="breadcrumb" >
-          <li ><a href="/king_admin/" ><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a></li>
-          <li >{{ app_name }}</li>
-          <li ><span id="table-name"><a href="/king_admin/{{ app_name }}/{{ table_name }}/">{% render_app_name admin_class %}</a></span></li>
+              <li ><a href="/king_admin/" ><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a></li>
+              <li >{{ app_name }}</li>
+              <li ><span id="table-name"><a href="/king_admin/{{ app_name }}/{{ table_name }}/">{% render_app_name admin_class %}</a></span></li>
 
-          {% block menu-add %}
-          <a class="navbar-right"  href="/king_admin/{{ app_name }}/{{ table_name }}/add/" >新增</a>
-          {% endblock %}
-      </ul>
+              {% block menu-add %}
+              <a class="navbar-right"  href="/king_admin/{{ app_name }}/{{ table_name }}/add/" >新增</a>
+              {% endblock %}
+         </ul>
     </div>
-        <div class="row">
-            <form method="get" action="" >
-                {% csrf_token %}
+    <div class="row">
+        <form method="get" action="" >
+            {% csrf_token %}
 
-                <!--查询检索栏-->
-                {% if  admin_class.list_filters %}
-                    <div class="row">
-                          {% for condition in admin_class.list_filters %}
-                              <div class="col-lg-3 col-md-6 col-sm-6 ">
-                               <span>{% get_key_val  condition admin_class  %}-</span>
-                               {% render_filter_eme  condition admin_class filter_condition %}
-                              </div>
-                          {% endfor %}
-                           <div class="col-lg-3 col-md-3 col-sm-3">
-                          <button type="submit" class="btn btn-primary btn-sm ">检索</button>
-                           </div>
-                    </div>
-                {% endif %}
-                <br class="visible-xs visible-sm visible-md">
-                <!--关键字搜索栏-->
-                <div class="row" >
-                      <div class="col-lg-3 col-md-3 col-sm-4 col-xs-8" >
-                          <input name="_q" type="text" class='form-control input-sm' placeholder="{% for i in admin_class.list_search %}{% search_name i admin_class %}&nbsp;{% endfor %}" value="{{ search_key }}">
-                      </div>
-                  <br class="visible-xs  ">
-                      <div class="col-lg-3 col-md-4 col-sm-3 col-xs-8"><button type="submit" class="btn btn-primary btn-sm" >查找关键字</button></div>
+            <!--查询检索栏-->
+            {% if  admin_class.list_filters %}
+                <div class="row">
+                      {% for condition in admin_class.list_filters %}
+                          <div class="col-lg-3 col-md-6 col-sm-6 ">
+                           <span>{% get_key_val  condition admin_class  %}-</span>
+                           {% render_filter_eme  condition admin_class filter_condition %}
+                          </div>
+                      {% endfor %}
+                       <div class="col-lg-3 col-md-3 col-sm-3">
+                      <button type="submit" class="btn btn-primary btn-sm ">检索</button>
+                       </div>
+                </div>
+            {% endif %}
+            <br class="visible-xs visible-sm visible-md">
+            <!--关键字搜索栏-->
+            <div class="row" >
+                  <div class="col-lg-3 col-md-3 col-sm-4 col-xs-8" >
+                      <input name="_q" type="text" class='form-control input-sm' placeholder="{% for i in admin_class.list_search %}{% search_name i admin_class %}&nbsp;{% endfor %}" value="{{ search_key }}">
                   </div>
-            </form>
-            <br>
+                  <br class="visible-xs  ">
+                  <div class="col-lg-3 col-md-4 col-sm-3 col-xs-8"><button type="submit" class="btn btn-primary btn-sm" >查找关键字</button></div>
+            </div>
+        </form>
+        <br>
 
-            <!--自定义action功能选项-->
-            <form action="" method="post" onsubmit="return ActionSubmit(this)" id="Addfieldsid">
-                {% csrf_token %}
-                <select class='btn-sm form-group ' name="action" id="select-value" >
-                    <option value="">-------------------------</option>
-                    {% for func_list in admin_class.list_action %}
-                        <option value="{{ func_list}}">{% func_name func_list admin_class %}</option>
-                    {% endfor %}
-                </select>
-                <button class=" btn btn-sm"  type="submit"  >Go</button>
-            </form>
-
-
-
-
-
-
-
+        <!--自定义action功能选项-->
+        <form action="" method="post" onsubmit="return ActionSubmit(this)" id="Addfieldsid">
+            {% csrf_token %}
+            <select class='btn-sm form-group ' name="action" id="select-value" >
+                <option value="">-------------------------</option>
+                {% for func_list in admin_class.list_action %}
+                    <option value="{{ func_list}}">{% func_name func_list admin_class %}</option>
+                {% endfor %}
+            </select>
+            <button class=" btn btn-sm"  type="submit"  >Go</button>
+        </form>
         <div class="panel">
 
-                <div class="panel-body">
-            <div class="table-responsive">
+            <div class="panel-body">
+                <div class="table-responsive">
 
-            <!--显示内容-->
-            <table class="table table-striped table-hover">
+                    <!--显示内容-->
+                    <table class="table table-striped table-hover">
 
-                <!--显示标题并实现排序功能-->
-                <thead>
-                      <tr class="breadcrumb">
-                      <th >
-                          <input  type="checkbox" id="all-choiced">
-                      </th>
-                      {% for column in admin_class.list_display %}
-                          <th>
-                              {% buile_table_header_column admin_class column orderby_key filter_condition %}
-                          </th>
-                      {% endfor %}
-                      </tr>
-                </thead>
+                        <!--显示标题并实现排序功能-->
+                        <thead>
+                              <tr class="breadcrumb">
+                              <th >
+                                  <input  type="checkbox" id="all-choiced">
+                              </th>
+                              {% for column in admin_class.list_display %}
+                                  <th>
+                                      {% buile_table_header_column admin_class column orderby_key filter_condition %}
+                                  </th>
+                              {% endfor %}
+                              </tr>
+                        </thead>
 
-                <!--显示数据字段详细信息-->
-                <tbody>
-                      {% for obj in query_sets %}
-                            <tr>
-                                <td>
-                                    <input id="choiced-field" type="checkbox" value="{{ obj.id }}">
-                                </td>
-                                {% built_table_row obj admin_class request  %}
-                            </tr>
-                      {% endfor %}
-                </tbody>
-            </table>
+                        <!--显示数据字段详细信息-->
+                        <tbody>
+                              {% for obj in query_sets %}
+                                    <tr>
+                                        <td>
+                                            <input id="choiced-field" type="checkbox" value="{{ obj.id }}">
+                                        </td>
+                                        {% built_table_row obj admin_class request  %}
+                                    </tr>
+                              {% endfor %}
+                        </tbody>
+                    </table>
 
              </div>
+            </div>
         </div>
-        </div>
 
+        <!--统计-->
+        <p>总计<span style="color: red">{{ query_sets.paginator.count }}</span>条记录</p>
 
-
-
-
-
-
-
-
-            <!--统计-->
-            <p>总计<span style="color: red">{{ query_sets.paginator.count }}</span>条记录</p>
-
-      </div>
+    </div>
 
           <!--分页栏-->
     <div class="row">
@@ -123,124 +108,14 @@
                           {% page_index query_sets filter_condition previous_orderby search_key %}
                       </ul>
                   </nav>
-              </div>
+            </div>
         <div class="col-sm-3"></div>
+        <br>
+        <br>
+        <br>
     </div>
 
-
-
-
 {% endblock %}
-
-
-
-
-
-
-
-
-
-
-
-
-{##}
-{# {% block menu-navigation %}#}
-{#      <!--导航条-->#}
-{#      <ol class="breadcrumb" style="font-size: large">#}
-{#          <li ><span href="" >{{ app_name }}</span></li>#}
-{#          <li ><span id="table-name"><a href="/king_admin/{{ app_name }}/{{ table_name }}/">{% render_app_name admin_class %}</a></span></li>#}
-{##}
-{#          {% block menu-add %}#}
-{#          <a class="navbar-right"  href="/king_admin/{{ app_name }}/{{ table_name }}/add/" style="margin-left: 40%">新增</a>#}
-{#          {% endblock %}#}
-{#      </ol>#}
-{#{% endblock %}#}
-
-{#{% block menu-right %}#}
-{##}
-{#      <!--显示功能-->#}
-{#      <div class="panel-body " style="overflow: auto" >#}
-{#            <form method="get" action="" >#}
-{#                {% csrf_token %}#}
-{##}
-{#                <!--查询检索栏-->#}
-{#                {% if  admin_class.list_filters %}#}
-{#                    <div class="row">#}
-{#                          {% for condition in admin_class.list_filters %}#}
-{#                               <span>&nbsp;&nbsp;&nbsp;&nbsp;{% get_key_val  condition admin_class  %}&nbsp;-&nbsp;</span>#}
-{#                               {% render_filter_eme  condition admin_class filter_condition %}#}
-{#                          {% endfor %}#}
-{#                          &nbsp;&nbsp;<button type="submit" class="btn btn-primary btn-sm">检索</button>#}
-{#                    </div>#}
-{#                {% endif %}#}
-{##}
-{#                <!--关键字搜索栏-->#}
-{#                <div class="row" >#}
-{#                      <div class="col-lg-2" style="display: inline-block;">#}
-{#                          <input name="_q" type="text" class='form-control input-sm' placeholder="{% for i in admin_class.list_search %}{% search_name i admin_class %}&nbsp;{% endfor %}" value="{{ search_key }}">#}
-{#                      </div>#}
-{#                      <button type="submit" class="btn btn-primary btn-sm" style="display: inline-block; width:auto"  >查找关键字</button>#}
-{#                  </div>#}
-{#            </form>#}
-{#            <br>#}
-{##}
-{#            <!--自定义action功能选项-->#}
-{#            <form class="row col-lg-2" action="" method="post" onsubmit="return ActionSubmit(this)" id="Addfieldsid">#}
-{#                {% csrf_token %}#}
-{#                <select class='btn-sm form-group ' name="action" id="select-value" style="display: inline-block;">#}
-{#                    <option value="">-------------------------</option>#}
-{#                    {% for func_list in admin_class.list_action %}#}
-{#                        <option value="{{ func_list}}">{% func_name func_list admin_class %}</option>#}
-{#                    {% endfor %}#}
-{#                </select>#}
-{#                &nbsp;&nbsp;<button type="submit" class=" btn btn-sm"  >Go</button>#}
-{#            </form>#}
-{##}
-{#            <!--显示内容-->#}
-{#            <table class="table table-hover">#}
-{##}
-{#                <!--显示标题并实现排序功能-->#}
-{#                <thead>#}
-{#                      <tr class="breadcrumb">#}
-{#                      <th style="width: 20px">#}
-{#                          <input  type="checkbox" id="all-choiced">#}
-{#                      </th>#}
-{#                      {% for column in admin_class.list_display %}#}
-{#                          <th>#}
-{#                              {% buile_table_header_column admin_class column orderby_key filter_condition %}#}
-{#                          </th>#}
-{#                      {% endfor %}#}
-{#                      </tr>#}
-{#                </thead>#}
-{##}
-{#                <!--显示数据字段详细信息-->#}
-{#                <tbody>#}
-{#                      <a href="" ></a>#}
-{#                      {% for obj in query_sets %}#}
-{#                            <tr>#}
-{#                                <td >#}
-{#                                    <input id="choiced-field" type="checkbox" value="{{ obj.id }}">#}
-{#                                </td>#}
-{#                                {% built_table_row obj admin_class request  %}#}
-{#                            </tr>#}
-{#                      {% endfor %}#}
-{#                </tbody>#}
-{#            </table>#}
-{##}
-{#            <!--统计-->#}
-{#            <p>总计{{ query_sets.paginator.count }}条记录</p>#}
-{##}
-{#          <!--分页栏-->#}
-{#          <div class="pagination">#}
-{#              <nav aria-label="...">#}
-{#                  <ul class="pagination">#}
-{#                      {% page_index query_sets filter_condition previous_orderby search_key %}#}
-{#                  </ul>#}
-{#              </nav>#}
-{#          </div>#}
-{#      </div>#}
-{##}
-{#{% endblock %}#}
 
 
 {#实现左侧菜单栏不变动#}

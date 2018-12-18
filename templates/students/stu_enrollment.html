@@ -1,8 +1,5 @@
 {% extends 'students/stu_course_list.html' %}
 
-
-
-
 {% block content-right %}
     <div class="row ">
       <ul class="breadcrumb" >
@@ -12,29 +9,23 @@
       </ul>
     </div>
 
-
-
-
-
-<div class="row row col-xs-offset-1">
-    {{ enroll_form.errors }}
+    <div class="row row col-xs-offset-1">
+        {{ enroll_form.errors }}
     </div>
     <div class="row row col-xs-offset-1">{{ msg }}</div>
     <form action="" role="form" method="post" >
-    {% csrf_token %}
+        {% csrf_token %}
         <div class="form-group row col-xs-offset-1" ><label for="">客户：{{ customer_name }}</label></div>
         <div class="form-group row col-xs-offset-1" ><label for="">邮箱：{{ customer_email }}</label></div>
         <br>
         <div class="form-group row col-xs-offset-1" ><label for="">报名校区：{{ branch }}</label></div>
         <div class="form-group row col-xs-offset-1" ><label for="">报名课程：{{ course }}</label></div>
-            <br>
+        <br>
         <div class="form-group row col-xs-12 col-sm-6 col-xs-offset-1" >
             <label >{{ template }}</label>
         </div>
         <div class="form-group row col-xs-offset-1"></div>
-{#<div class="row col-xs-offset-1">#}
         {% for field in enroll_form %}
-{#            </div>#}
             <div class="form-group row col-xs-offset-1" >
                 <label  for="">{{ field.label }}:</label>
             </div>
@@ -42,31 +33,27 @@
                 {{ field }}{{ field.errors }}
             </div>
         {% endfor %}
-    <div class="row col-xs-offset-1">
-        <button type="submit" class="btn btn-default  pull-left" disabled>下一步</button>
+        <div class="row col-xs-offset-1">
+            <button type="submit" class="btn btn-default  pull-left" disabled>下一步</button>
         </div>
     </form>
     <br>
     <br>
     <br>
-
-
 {% endblock %}
-    
-    {% block script-obj %}
-        <script>
-        $(":checkbox").click(function () {
-            if ($("input:checked").length == 1){
-                       $(":submit").addClass('btn-success');
-                        $(":submit").attr('disabled',false)
-            }else {
-                  $(":submit").addClass('btn-default');
-                        $(":submit").removeClass('btn-success');
-                          $(":submit").attr('disabled',true)
-            }
-
-        });
 
 
-        </script>
-    {% endblock %}
+{% block script-obj %}
+    <script>
+    $(":checkbox").click(function () {
+        if ($("input:checked").length == 1){
+                   $(":submit").addClass('btn-success');
+                    $(":submit").attr('disabled',false)
+        }else {
+              $(":submit").addClass('btn-default');
+                    $(":submit").removeClass('btn-success');
+                      $(":submit").attr('disabled',true)
+        }
+    });
+    </script>
+{% endblock %}

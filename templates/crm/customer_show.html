@@ -1,13 +1,11 @@
 
 {% extends 'crm/info_find.html' %}
 {% load crm_tags %}
-    {% block menuadd %}
-          <li ><span id="table-name"><a href="/{{ app_name }}/{{ table_name }}/">{% render_app_name admin_class %}</a></span></li>
-          <li >查看</li>
+{% block menuadd %}
+      <li ><span id="table-name"><a href="/{{ app_name }}/{{ table_name }}/">{% render_app_name admin_class %}</a></span></li>
+      <li >查看</li>
+      {% endblock %}
+      {% block button %}
+      <a class="btn btn-default " href="/{{ app_name }}/{{ table_name }}/">返回</a>
 
-              {% endblock %}
-
-                {% block button %}
-                <a class="btn btn-default " href="/{{ app_name }}/{{ table_name }}/">返回</a>
-
-                {% endblock %}
+{% endblock %}

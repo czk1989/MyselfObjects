@@ -60,3 +60,7 @@ def page_not_found(request):
 
 def page_error(request):
     return render(request, 'page_500.html')
+
+
+def test(request):
+    return render(request,'test.html')

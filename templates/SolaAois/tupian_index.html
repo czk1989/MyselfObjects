@@ -1,0 +1,62 @@
+{% extends 'SolaAois/tupian_base.html' %}
+{% load film_tags %}
+{% block title-label %}{{ role }} | 图片 | {% endblock %}
+{% block table-css %}
+    <style>
+
+    @media screen and (min-width: 482px){
+        .lgdiv{
+            height: 350px;
+        }
+    }
+
+    @media screen and (max-width: 481px){
+        .lgdiv{
+            height: 200px;
+        }
+    }
+    </style>
+{% endblock %}
+
+{% block xiaodianying %}
+
+    <div class="row col-xs-12 text-center">
+        <div class="row" style="overflow: auto">
+
+        {% if query_sets %}
+
+            {% for obj in query_sets %}
+                <div class="col-lg-3 col-xs-6 lgdiv" >
+                     <a href="{% urldd_id role obj.0 %}"><img style="width: 100%; height: 80%;max-width: 100%; display: block; " class="img-responsive" src="/static/{{ role }}/{{ obj.0 }}/{{ obj.1 }}" alt=""><span class="blockquote-reverse">{{ obj.0 }}</span></a>
+                </div>
+            {% endfor %}
+
+        {% else %}
+
+                <div>搜索到<span style="color: red">0</span>张图片...</div>
+
+        {% endif %}
+        </div>
+
+        <div class="row text-center hidden-xs">
+              <nav aria-label="...">
+                  <ul class="pagination ">
+                      {% page_index query_sets search_key %}
+                  </ul>
+              </nav>
+        </div>
+
+        <div class="row text-center visible-xs">
+              <nav aria-label="Page navigation">
+                  <ul class="pagination btn-xs">
+                      {% page_index query_sets search_key %}
+                  </ul>
+              </nav>
+            <br>
+            <br>
+            <br>
+        </div>
+        <br>
+        <br>
+    </div>
+{% endblock %}

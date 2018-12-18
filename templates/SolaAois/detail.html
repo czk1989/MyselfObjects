@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block title-label %}{{ name }} | {{ role }} | 图片 | {% endblock %}
+
+{% block table-css %}
+    <style>
+
+    @media screen and (min-width: 482px){
+        .lgdiv{
+            height: 400px;
+
+        }
+    }
+
+    @media screen and (max-width: 481px){
+        .lgdiv{
+            height: 300px;
+        }
+    }
+    </style>
+{% endblock %}
+
+
+{% block content %}
+    <br>
+
+    <div class="row  text-center"><h3>{{ name }}<a href="/tupian/{{ role }}/">（返回）</a></h3></div>
+
+    <div id="carousel-example-generic" class="carousel slide col-xs-12  lgdiv " data-ride="carousel">
+
+      <div class="carousel-inner " role="listbox">
+        <div class="item active " >
+          <img class="img-responsive " style="width: 100%" src="/static/{{ role }}/{{ name }}/{{ first_pic }}" alt="">
+          <div class="carousel-caption">
+            ...
+          </div>
+        </div>
+
+          {% for pic in pic_list %}
+        <div class="item " >
+          <img class="img-responsive " style="width: 100%;" src="/static/{{ role }}/{{ name }}/{{ pic }}" alt="">
+          <div class="carousel-caption">
+            ...
+          </div>
+        </div>
+          {% endfor %}
+
+      <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+
+      </a>
+      <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+
+      </a>
+    </div>
+        <br>
+        <br>
+        <br>
+    </div>
+
+{% endblock %}

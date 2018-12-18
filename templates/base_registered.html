@@ -1,42 +1,23 @@
-
 {% extends 'base.html' %}
 
-
 {% block content %}
-
-        <div class="row clearfix  ">
-{#        <div class="row col-xs-3"></div>#}
+    <div class="row clearfix  ">
         <div class="row col-xs-10 col-xs-offset-1">
-    <form class="form-horizontal " method="post" action=".">
-{#            <div class="row"  >#}
+            <form class="form-horizontal " method="post" action=".">
                 <h3 ><span style="color: red">*</span>注册</h3>
-
-{#            </div>#}
-    {% csrf_token %}
-    {{ errors }}
-          {% for foo in account_obj %}
-                <div class="form-group" >
-                    <label for="inputEmail3" class="">{{ foo.label }}</label>
+                {% csrf_token %}
+                {{ errors }}
+                {% for foo in account_obj %}
+                    <div class="form-group" >
+                        <label for="inputEmail3" class="">{{ foo.label }}</label>
                         <div class="">{{ foo }}</div>
+                    </div>
+                {% endfor %}
+                <br>
+                <div class="row" >
+                    <button type="submit" class="btn btn-success" ><span class="glyphicon glyphicon-ok" aria-hidden="true">提交</span></button>
                 </div>
-          {% endfor %}
-        <br>
-            <div class="row" >
-                <button type="submit" class="btn btn-success" ><span class="glyphicon glyphicon-ok" aria-hidden="true">提交</span></button>
-            </div>
-    </form>
+            </form>
         </div>
-
     </div>
-
-
-
-
-
-
-
-
-
-
-
 {% endblock %}

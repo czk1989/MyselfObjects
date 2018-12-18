@@ -30,6 +30,9 @@ urlpatterns = [
     path('crm/',include('crm.urls')),
     path('students/',include('students.urls')),
     path('teachers/',include('teachers.urls')),
+    path('film/',include('film.urls')),
+    path('tupian/',include('SolaAois.urls')),
+    path('news/',include('newsapp.urls')),
 ]
 
 

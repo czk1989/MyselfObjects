@@ -2,58 +2,49 @@
 {% load students_tags %}
 {% block title-label %}班级表 | 学员 | 网络培训CRM | {% endblock %}
 
-
-
 {% block content-right %}
     <div class="row ">
       <ul class="breadcrumb" >
           <li ><a href="/students/" ><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a></li>
           <li ><span id="table-name"><a href="/students/classlist/">班级表</a></span></li>
-
       </ul>
     </div>
 
     <div class="panel">
               <!--显示功能-->
     <!--===================================================-->
-      <div class="panel-body " >
+        <div class="panel-body " >
 
-<div class="table-responsive">
-                        <!--显示内容-->
-                <!--===================================================-->
-            <table class="table table-responsive">
+            <div class="table-responsive">
+                                    <!--显示内容-->
+                            <!--===================================================-->
+                    <table class="table table-responsive">
 
-                        <!--显示标题并实现排序功能-->
-                <!--===================================================-->
-                <thead>
-                      <tr class="breadcrumb">
-                          {% course_title course_list.0 course_display%}
-                      </tr>
-                </thead>
+                                <!--显示标题并实现排序功能-->
+                        <!--===================================================-->
+                        <thead>
+                              <tr class="breadcrumb">
+                                  {% course_title course_list.0 course_display%}
+                              </tr>
+                        </thead>
 
-                    <!--显示数据字段详细信息-->
-              <!--===================================================-->
-                <tbody>
-
-                      {% for column in course_list %}
-                            <tr>
-                                {% built_table_row column course_display stu_enroll_dict%}
-
-                            </tr>
-                      {% endfor %}
-
-                </tbody>
-            </table>
-      </div>
-      </div>
-      </div>
-
-
+                            <!--显示数据字段详细信息-->
+                      <!--===================================================-->
+                        <tbody>
+                              {% for column in course_list %}
+                                    <tr>
+                                        {% built_table_row column course_display stu_enroll_dict%}
+                                    </tr>
+                              {% endfor %}
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 {% block script-list %}
     <script>
-
         active_ele=$('span#table-name').text();
         $('li#menu a').each(
             function () {
@@ -61,7 +52,6 @@
                 $(this).parent().addClass('active ');
             }
         });
-
     </script>
     {% block script-obj %}
     {% endblock %}

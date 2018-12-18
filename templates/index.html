@@ -1,136 +1,35 @@
 
 {% extends 'base.html' %}
 
-
 {% block index %}
-    			<div class="jumbotron">
-				<h1>
-					Tips：
-				</h1>
-				<p>
-                    You can walk around here, and also leave a footprint, but please don't trample the flowers, if you find BUG, please feel free to give feedback, thank you!
-                您可以在这里走来走去，还能留下足迹(增添数据)，但是请不要践踏花草(删除数据)，如您发现BUG，烦请您及时反馈，谢谢！
-                </p>
-				<p>
-					 <a class="btn btn-primary btn-large" href="#detail">网站导读</a>
-				</p>
-			</div>
-    {% endblock %}
-
-
-      {% block content %}
-
-	<div id="detail" class="row clearfix">
-		<div class="col-md-4 column">
-			<h2>
-				CRM
-			</h2>
-			<p>
-				CRM管理系统模拟了网络培训后台管理系统，包括登录角色分配，依托django自带的权限管理模块重构适合本系统的权限认证功能，重写部分django框架下admin的功能，数据存储用的是mysql数据库，
-                    用户登录验证码功能用到了redis缓存数据库，等等。。。
-			</p>
-			<p>
-				 <a class="btn" href="/accounts/login_choice/">进入 »</a>
-			</p>
-		</div>
-		<div class="col-md-4 column">
-			<h2>
-				百家影音&新闻
-			</h2>
-			<p>
-                 该模块通过自己学到的爬虫技术，主要是利用了python的scrapy框架，从网络上爬取一些有趣内容放到站点供自己和有兴趣的小朋友们观看，饼虽小，但味道狠beautiful、而且十分sex，那“sex”希望诸君不要往邪恶的地方想，肯定是健康内容呀，难道你想的是……
-                		</p>
-			<p>
-				 <a class="btn" href="#">进入 »</a>
-			</p>
-		</div>
-		<div class="col-md-4 column">
-			<h2>
-				其他隐藏功能
-			</h2>
-			<p>
-小撸怡情、大撸伤身、樯橹灰飞烟灭，据说是苏轼写的，看人家文采多好……，不要点了，点了也没有—.—!</p>
-			<p>
-				 <a class="btn" href="#">进入 »</a>
-			</p>
-		</div>
+    <div class="jumbotron" style="margin-top: -10px">
+        <h1>Tips：</h1>
+        <p><strong>You can walk around here, and also leave a footprint, but please don't trample the flowers, if you find BUG, please feel free to give feedback, thank you!
+        </strong>您可以在这里走来走去，还能留下足迹(增添数据)，但是请不要践踏花草(删除数据)，如您发现<strong>BUG</strong>，烦请您及时反馈，谢谢！</p>
+        <p><a class="btn btn-primary btn-large" href="#detail">网站导读</a></p>
     </div>
-        {% endblock %}
-{#{% block content %}#}
-{##}
-{#		<div class="col-md-4 column">#}
-{#			<h2>#}
-{#				Heading#}
-{#			</h2>#}
-{#			<p>#}
-{#				Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.#}
-{#			</p>#}
-{#			<p>#}
-{#				 <a class="btn" href="#">View details »</a>#}
-{#			</p>#}
-{#		</div>#}
-{#		<div class="col-md-4 column">#}
-{#			<h2>#}
-{#				Heading#}
-{#			</h2>#}
-{#			<p>#}
-{#				Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.#}
-{#			</p>#}
-{#			<p>#}
-{#				 <a class="btn" href="#">View details »</a>#}
-{#			</p>#}
-{#		</div>#}
-{#		<div class="col-md-4 column">#}
-{#			<h2>#}
-{#				Heading#}
-{#			</h2>#}
-{#			<p>#}
-{#				Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.#}
-{#			</p>#}
-{#			<p>#}
-{#				 <a class="btn" href="#">View details »</a>#}
-{#			</p>#}
-{#		</div>#}
-{##}
-{#{% endblock %}#}
-{##}
-{#body中下部#}
-{#    <div class="container">#}
-{#        <div class="row" style="margin-top: -25px">#}
-{#            <ul class="bxslider">#}
-{##}
-{#                <li style="text-align: center">#}
-{#                    <p style="display: inline-block;margin: 0 30px;"><a href="/accounts/login_choice/" ><img src="/static/img/2.jpg" class="img-circle " width="250" height="250"/><strong>网络培训CRM管理系统</strong></a></p>#}
-{#                    <p style="display: inline-block;margin: 0 30px;"><a href="" ><img src="/static/img/1.jpg" class="img-circle " width="250" height="250"/><strong>其他</strong></a></p>#}
-{#                    <p style="display: inline-block;margin: 0 30px;"><a href="" ><img src="/static/img/3.jpg" class="img-circle " width="250" height="250"/><strong>分布式监控系统后台入口</strong></a></p>#}
-{#                </li>#}
-{##}
-{#                <li style="text-align: center">#}
-{#                    <p style="display: inline-block;margin: 0 30px;"><a href="" ><img src="/static/img/U10729P693DT20140517155919.jpg" class="img-circle " width="250" height="250"/><strong>门户网站暂未开发</strong></a></p>#}
-{#                    <p style="display: inline-block;margin: 0 30px;"><a href="" ><img src="/static/img/VersaillesGhosts_ZH-CN11794136165_1920x1080.jpg" class="img-circle " width="250" height="250"/><strong>正在开发</strong></a></p>#}
-{#                    <p style="display: inline-block;margin: 0 30px;"><a href="" ><img src="/static/img/201161613210543778070.jpg" class="img-circle " width="250" height="250"/><strong>正在开发</strong></a></p>#}
-{#                </li>#}
-{#            </ul>#}
-{#        </div>#}
-{#    </div>#}
+{% endblock %}
 
-{#</body>#}
 
-{#网页底部#}
-{#<footer>#}
-{#    <div style="text-align: center;">#}
-{#        <p>© 2018 Company...</p>#}
-{#    </div>#}
-{#</footer>#}
-
-{##}
-{#{% block script-list %}#}
-{##}
-{#    <script>#}
-{#    $(function(){#}
-{#    $('.bxslider').bxSlider({#}
-{#        auto:true,#}
-{#    });#}
-
-{#    </script>#}
-{#{% endblock %}#}
+{% block content %}
+    <div id="detail" class="row clearfix">
+        <div class="col-md-4 column">
+            <h2>CRM</h2>
+            <p>CRM管理系统模拟了网络培训后台管理系统，包括登录角色分配，依托django自带的权限管理模块重构适合本系统的权限认证功能，重写部分django框架下admin的功能，数据存储用的是mysql数据库，
+               用户登录验证码功能用到了redis缓存数据库，等等...</p>
+            <p><a class="btn" href="/accounts/login_choice/">进入 »</a></p>
+        </div>
+        <div class="col-md-4 column">
+            <h2>百家影音&新闻</h2>
+            <p>
+                该模块通过自己学到的爬虫技术，主要是利用了python的scrapy框架，从网络上爬取一些有趣内容放到站点供自己和有兴趣的小朋友们观看，饼虽小，但味道狠beautiful、而且十分sex，那“sex”希望诸君不要往邪恶的地方想，肯定是健康内容呀，难道你想的是……
+             </p>
+            <p><a class="btn" href="/film/see/">进入 »</a></p>
+        </div>
+        <div class="col-md-4 column">
+            <h2>其他隐藏功能</h2>
+            <p>小撸怡情、大撸伤身、樯橹灰飞烟灭，据说是苏轼写的，看人家文采多好……，不要点了，点了也没有—.—!</p>
+            <p><a class="btn" href="#">进入 »</a></p>
+        </div>
+    </div>
+{% endblock %}

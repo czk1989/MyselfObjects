@@ -1,6 +1,5 @@
 {% extends 'students/stu_course_list.html' %}
 
-
 {% block content-right %}
     <div class="row ">
       <ul class="breadcrumb" >
@@ -10,10 +9,6 @@
           <li >付款</li>
       </ul>
     </div>
-
-
-
-
 
     <form action="" class="form-horizontal" role="form" method="post" >
         {% csrf_token %}
@@ -27,14 +22,14 @@
             <label for="">课程费用：{{ price }}元</label>
         </div>
 
-                {% for field in payment_form %}
-            <div  >
+        {% for field in payment_form %}
+            <div>
                 <label  for="">付款{{ field.label }}(元):</label>{{ field }}
             </div>
         {% endfor %}
-            <div>
-                {{ msg }}
-            </div>
+        <div>
+            {{ msg }}
+        </div>
         <br>
         <div  ><button type="submit" class="btn btn-success pull-left">付款</button></div>
     </form>

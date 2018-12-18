@@ -1,0 +1,39 @@
+{% extends 'film/film_base.html' %}
+{% block table-css %}
+
+    <style>
+    @media (min-width:482px) {
+            .iframed{
+                min-height: 500px;
+                min-width: 900px;
+            }
+                }
+
+</style>
+{% endblock %}
+
+{% block content %}
+    <div class="row text-center"><h4>---------*********---------</h4></div>
+    <div class="row" >
+        <div class="col-lg-12 text-center" >
+            <iframe class="iframed" id="myiframe" scrolling="no" src="http://{{ vip_film_url }}" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block script-list %}
+
+
+    <script>
+
+        window.onload = window.onresize = function () {
+             var bodyw=document.body.clientWidth;
+            for(var ilength=0;ilength<=document.getElementsByTagName("iframe").length;ilength++){
+
+                document.getElementsByTagName("iframe")[ilength].height = bodyw*9/16;
+        };
+
+
+    </script>
+{% endblock %}

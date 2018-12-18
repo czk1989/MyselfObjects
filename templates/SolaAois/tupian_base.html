@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% block title-label %}图片 | {% endblock %}
+
+
+
+{% block content %}
+    <br>
+    <div class="container">
+        <div class="row clearfix">
+
+                <nav class="row navbar navbar-default hidden-xs text-center" >
+                    <div class="col-lg-6 ">
+                        <ul class="nav navbar-nav ">
+                            {% if panduan %}
+                            <li class="active"><a href="/tupian/meinv">美女</a></li>
+                            <li><a href="/tupian/mingxing/">明星</a></li>
+                            {% else %}
+                            <li><a href="/tupian/meinv">美女</a></li>
+                            <li class="active"><a href="/tupian/mingxing/">明星</a></li>
+                            {% endif %}
+                        </ul>
+                   </div>
+
+                        <div class="col-lg-6 ">
+                            <form class="form-inline navbar-form" method="get" action=".">
+
+                                <div class="form-group">
+                                     <input name="_q" type="text" class='form-control ' placeholder="搜索" value="{{ search_key }}">
+                                </div>
+
+                                <button class="btn btn-default" type="submit">Go!</button>
+                            </form>
+                        </div>
+                </nav>
+
+
+                <div class="row visible-xs  navbar-default" >
+                    <ul class="nav navbar-nav text-center">
+                        {% if panduan %}
+                        <li class="col-xs-6 active"><a href="/tupian/meinv/">美女</a></li>
+                        <li class="col-xs-6"><a href="/tupian/mingxing/">明星</a></li>
+                        {% else %}
+                        <li class="col-xs-6"><a href="/tupian/meinv/">美女</a></li>
+                        <li class="col-xs-6 active"><a href="/tupian/mingxing/">明星</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+
+                    <div class="visible-xs">
+                        <form class="form-inline navbar-form" method="get" action=".">
+
+                            <div class="col-xs-6 form-group">
+                                 <input name="_q" type="text" class='form-control ' placeholder="搜索" value="{{ search_key }}">
+                            </div>
+                            <div class="col-xs-6 form-group">
+                                <button class="btn btn-default" type="submit">Go!</button>
+                            </div>
+
+                        </form>
+
+                    </div>
+
+            {% block xiaodianying %}
+
+            {% endblock %}
+        </div>
+    </div>
+
+{% endblock %}

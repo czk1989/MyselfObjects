@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% block title-label %}百家影视 | {% endblock %}
+
+{% block login %}
+    <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">用户中心<strong class="caret"></strong></a>
+            <ul class="dropdown-menu">
+                <li>
+                     <a href="#">(功能待开发)</a>
+                </li>
+                {% if request.session.user_id %}
+                    <li>
+                         <a href="/film/filmlogout/">注销</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </li>
+    </ul>
+{% endblock %}
+
+
+{% block content %}
+    <br>
+    <div class="container">
+        <div class="row clearfix">
+
+                <nav class="row navbar navbar-default hidden-xs text-center" >
+                    {% if request.session.user_id %}
+                        <div class="col-lg-6">
+                        <ul class="nav navbar-nav ">
+                            <li>...</li>
+                            <li>...</li>
+                            <li>...</li>
+                            <li>...</li>
+
+
+                        </ul>
+               </div>
+                    {% else %}
+                        <div class="col-lg-6">
+                            <form class="form-inline navbar-form" method="post" action="/film/see/">
+                                {% csrf_token %}
+                                  <div class="form-group">
+        {#                            <label for="exampleInputName2">Email</label>#}
+                                    <input type="email" class="form-control" name="InputEmail" placeholder="jane@example.com">
+                                  </div>
+                                  <div class="form-group">
+        {#                            <label for="exampleInputEmail2">Password</label>#}
+                                    <input type="password" class="form-control" name="InputName" placeholder="123456">
+                                  </div>
+                                  <button type="submit" class="btn btn-default">Login</button>
+                                </form>
+
+                        </div>
+
+
+
+                    {% endif %}
+                        <div class="col-lg-6">
+                            <form class="form-inline navbar-form" method="get" action=".">
+
+                                <div class="form-group">
+                                     <input name="_q" type="text" class='form-control ' placeholder="搜索" value="{{ search_key }}">
+                                </div>
+
+                                <button class="btn btn-default" type="submit">Go!</button>
+                            </form>
+                        </div>
+                </nav>
+
+
+                {% if request.session.user_id %}
+                <div class="row visible-xs  navbar-default" >
+                    <ul class="nav navbar-nav text-center">
+                        <li>...</li>
+                        <li>...</li>
+                        <li>...</li>
+                        <li>...</li>
+
+                    </ul>
+                </div>
+                {% else %}
+                 <div class="row visible-xs  navbar-form navbar-default" >
+                    <form class="form-inline" method="post" action="/film/see/">
+                        {% csrf_token %}
+                      <div class="form-group col-xs-4">
+                        <input type="email" class="form-control" name="InputEmail" placeholder="Email">
+                      </div>
+                      <div class="form-group col-xs-4">
+                        <input type="password" class="form-control" name="InputName" placeholder="Password">
+                      </div>
+                        <div class="col-xs-2">
+                      <button type="submit" class="btn btn-default">Login</button>
+                        </div>
+                    </form>
+                 </div>
+                {% endif %}
+                    <div class="visible-xs">
+                        <form class="form-inline navbar-form" method="get" action=".">
+
+                            <div class="col-xs-6 form-group">
+                                 <input name="_q" type="text" class='form-control ' placeholder="搜索" value="{{ search_key }}">
+                            </div>
+                            <div class="col-xs-6 form-group">
+                                <button class="btn btn-default" type="submit">Go!</button>
+                            </div>
+
+                        </form>
+
+                    </div>
+
+            {% block dianying %}
+
+            {% endblock %}
+        </div>
+    </div>
+
+{% endblock %}
+

@@ -1,4 +1,3 @@
-
 {% extends 'king_admin/king_admin_info.html' %}
 {% load king_admin_tags %}
 
@@ -13,22 +12,22 @@
       </ul>
     </div>
 
-<div class="row col-xs-10 col-xs-offset-1 col-sm-12">
-       <div class="row text-danger">
-           {{ errors }}
-           {% display_obj_related objs table_name %}
-       </div>
+    <div class="row col-xs-10 col-xs-offset-1 col-sm-12">
+           <div class="row text-danger">
+               {{ errors }}
+               {% display_obj_related objs table_name %}
+           </div>
 
-       <form action="{% to_url objs app_name table_name  %}" method="post" >
-             {% csrf_token %}
-             <input type="hidden" name="delete_obj" value="{{ objs_id }}">
-             <button class="btn btn-danger  btn-sm" type="submit"> 确认删除<span class ='glyphicon glyphicon-trash ' aria-hidden='true'></span></button>
-             <a href="{{ back_edit_url_path }}" ><span class="btn btn-sm btn-default">返回</span></a>
-           <br>
-           <br>
-           <br>
-       </form>
+           <form action="{% to_url objs app_name table_name  %}" method="post" >
+                {% csrf_token %}
+                <input type="hidden" name="delete_obj" value="{{ objs_id }}">
+                <button class="btn btn-danger  btn-sm" type="submit"> 确认删除<span class ='glyphicon glyphicon-trash ' aria-hidden='true'></span></button>
+                <a href="{{ back_edit_url_path }}" ><span class="btn btn-sm btn-default">返回</span></a>
+                <br>
+                <br>
+                <br>
+           </form>
 
-</div>
+    </div>
 {% endblock %}
 

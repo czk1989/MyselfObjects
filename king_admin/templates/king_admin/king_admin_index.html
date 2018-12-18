@@ -5,30 +5,31 @@
 {% block menu-left %}
       {% if menus %}
              {% for first_menu,second_menus in menus.items %}
-                    <h2 class="btn-info text-center">{{ first_menu }}</h2>
-                    <ul class="nav nav-pills nav-stacked">
-                      {% for second_menu_name,second_menu_url in second_menus.items %}
-                          <li id="menu">
-                              <a class="label label-default " href="/king_admin/{{ first_menu | lower }}/{{second_menu_url}}/" >{{ second_menu_name }}</a>
-                          </li>
-                      {% endfor %}
-                    </ul>
+                <h2 class="btn-info text-center">{{ first_menu }}</h2>
+                <ul class="nav nav-pills nav-stacked">
+                  {% for second_menu_name,second_menu_url in second_menus.items %}
+                      <li id="menu">
+                          <a class="label label-default " href="/king_admin/{{ first_menu | lower }}/{{second_menu_url}}/" >{{ second_menu_name }}</a>
+                      </li>
+                  {% endfor %}
+                </ul>
              {% endfor %}
-          {% else %}
-              <div>(空)</div>
+      {% else %}
+          <div>(空)</div>
       {% endif %}
 
 {% endblock %}
 
+
 {% block content-right %}
     <div class="row">
 
-           			<div class="jumbotron">
-				<h2>说明：</h2>
-				<p>CRM系统重写了django框架下admin的部分功能，包括用户登录，权限认证，查询等等，本系统使用的是mysql数据库，
-                    登录界面的验证码功能用到了redis缓存数据库，通过CRM系统的开发，尽量巩固、实践、并扩展自己学的python知识。</p>
+        <div class="jumbotron">
+            <h2>说明：</h2>
+            <p>CRM系统重写了django框架下admin的部分功能，包括用户登录，权限认证，查询等等，本系统使用的是mysql数据库，
+                登录界面的验证码功能用到了redis缓存数据库，通过CRM系统的开发，尽量巩固、实践、并扩展自己学的python知识。</p>
 
-    </div>
+        </div>
     </div>
 {% endblock %}
 
@@ -43,11 +44,10 @@
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
                     {% for second_menu_name,second_menu_url in second_menus.items %}
                         <li id="menu">
-                         <a class="btn-default col-xs-12 " href="/king_admin/{{ first_menu | lower }}/{{second_menu_url}}/" >{{ second_menu_name }}</a>
+                        <a class="btn-default col-xs-12 " href="/king_admin/{{ first_menu | lower }}/{{second_menu_url}}/" >{{ second_menu_name }}</a>
                         </li>
                     {% endfor %}
                 </ul>
-
             </div>
          {% endfor %}
     </div>

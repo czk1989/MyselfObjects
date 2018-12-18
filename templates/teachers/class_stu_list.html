@@ -2,9 +2,7 @@
 {% load teachers_tags %}
 {% block title-label %}班级学员列表 | 讲师 | 网络培训CRM | {% endblock %}
 
-
-
-    {% block content-right %}
+{% block content-right %}
     <div class="row ">
       <ul class="breadcrumb" >
           <li ><span ><a href="/teachers/" ><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a></span></li>
@@ -18,8 +16,6 @@
             <h3 class="panel-title">{{ class_ojb }}</h3>
         </div>
 
-        <!-- Striped Table -->
-        <!--===================================================-->
         <div class="panel-body">
             <div class="table-responsive">
                 <table class="table table-striped table-hover">
@@ -41,13 +37,10 @@
                     <tbody>
                         {% get_course_grades class_ojb  as class_grade_dic %}
                         {% get_course_ranking class_grade_dic  as course_ranking_dic %}
-{#                        {{ class_grade_dic }}#}
-{#                        {{ course_ranking_dic }}#}
-{#                        {{ class_ojb.enrollment_set.select_related }}#}
                         {% for enroll_obj  in  class_ojb.enrollment_set.select_related%}
 
                         <tr>
-                            <td><a href="#fakelink" class="btn-link">{{ enroll_obj.customer.id }}</a></td>
+                            <td><a href="#" class="btn-link">{{ enroll_obj.customer.id }}</a></td>
                             <td>{{ enroll_obj.customer.qq }}</td>
                             <td>{{ enroll_obj.customer.name }}</td>
                             <td>{{ enroll_obj.enrolled_date}}</td>
@@ -69,9 +62,6 @@
                 </table>
             </div>
         </div>
-        <!--===================================================-->
-        <!-- End Striped Table -->
-
     </div>
 
 {% endblock %}
