@@ -31,7 +31,7 @@
 - python manage.py runserver 0.0.0.0:8000
 
 ### 作者基本信息
-- [blog](http://www.cnblogs.com/daemon-czk/)
+- [blog]:(http://www.cnblogs.com/daemon-czk/)
 - author：czk
 - 个人网站地址：(http://229z602g38.imwork.net/)
 
