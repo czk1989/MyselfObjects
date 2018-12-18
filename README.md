@@ -31,6 +31,7 @@ username: czk@126.com password: meiyoumima
 ###使用中的bug可加此群汇报 qq: python开发交流群 255012808
 
 ##以下为一些项目截图
+![Alt text](https://github.com/czk1989/MyselfObjects/raw/master/%E4%B8%AA%E4%BA%BA%E7%BD%91%E7%AB%99%E7%95%8C%E9%9D%A2%E5%B1%95%E7%A4%BA/IMG_20181218_162646.png)
 
 ####项目入口
 
