@@ -20,6 +20,7 @@
 - 同样实现视频的分类处理
 - 实现爬取某一网站的视频文件
 
+
 ## 基本使用
 ### requirements
 - python3.7+
@@ -34,8 +35,8 @@
 - author：czk
 -个人网站地址：(http://229z602g38.imwork.net/)
 
-## 以下为一些项目截图
 
+## 以下为一些项目截图
 ### PC端界面
 
 ![Alt text](https://github.com/czk1989/MyselfObjects/raw/master/%E4%B8%AA%E4%BA%BA%E7%BD%91%E7%AB%99%E7%95%8C%E9%9D%A2%E5%B1%95%E7%A4%BA/%E9%A6%96%E9%A1%B5.jpg)
@@ -55,6 +56,7 @@
 
 
 ![Alt text](https://github.com/czk1989/MyselfObjects/raw/master/%E4%B8%AA%E4%BA%BA%E7%BD%91%E7%AB%99%E7%95%8C%E9%9D%A2%E5%B1%95%E7%A4%BA/%E7%AE%A1%E7%90%86%E5%91%98%E7%9A%84%E5%AE%A2%E6%88%B7%E4%BF%A1%E6%81%AF%E8%A1%A8.jpg)
+
 
 ### 手机端界面
 
